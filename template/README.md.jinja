@@ -1,30 +1,44 @@
-# [Demo]({{ repository }}/blob/draft/main1.pdf)
+# {{project_name | lower}}
 
-Remove or replace the arxiv link
+Simple Notebook repo without heavy ci/cd.
 
-[![arXiv](https://img.shields.io/badge/arXiv-2305.19484-b31b1b.svg)](https://arxiv.org/abs/2305.19484)
+Good choice for experiments without the ambition to move the
+resulting software further down to pypi, etc. A more complete
+setup is provided in the blueprints for packages.
 
-## Link to a companion Python package
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)]({{ repository }})
 
-Please correct the link as you wish
+## The Makefile
 
-Companion [Python package](https://github.com/{{ username }})
-
-## Abstract
-
-{{ description }}
-
-## About this repo
-
-We have a [workflow](template/.github/workflows/latex.yml) compiling the LaTeX document(s)
-in [paper](paper). For that step we are using [tectonic](https://github.com/tectonic-typesetting/tectonic).
-The resulting pdf documents are released
-to the [draft branch]({{ repository }}/tree/draft) of the repo.
-
-## Hint
-
-Play with
+Please start the day with
 
 ```bash
 make
 ```
+
+If you prefer working on a clean sheet do
+
+```bash
+make clean
+```
+
+## The virtual environment
+
+Please use
+
+```bash
+make install
+```
+
+to build a virtual environment containing all dependencies declared in your
+`requirements.txt` file. This will run a simple pip install.
+
+## Marimo
+
+We use Marimo (instead of Jupyter) to perform our experiments. Start with
+
+```bash
+make marimo
+```
+
+For smaller projects we recommend the installing jupyter route and work locally.

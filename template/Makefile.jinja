@@ -1,8 +1,29 @@
 .DEFAULT_GOAL := help
 
+folder = notebooks
+
 venv:
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
 	@uv venv
+
+
+.PHONY: install
+install: venv ## Install a virtual environment
+	@uv pip install --upgrade pip
+	@uv pip install -r requirements.txt
+
+
+.PHONY: fmt
+fmt: venv ## Run autoformatting and linting
+	@uv pip install pre-commit
+	@uv run pre-commit install
+	@uv run pre-commit run --all-files
+
+
+.PHONY: clean
+clean:  ## Clean up caches and build artifacts
+	@git clean -X -d -f
+	@git branch -v | grep "\[gone\]" | cut -f 3 -d ' ' | xargs git branch -D
 
 
 .PHONY: help
@@ -11,24 +32,7 @@ help:  ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
 
 
-# list the papers here
-.PHONY: compile
-compile: ## Compile document(s)
-	@tectonic paper/{{ project_name }}.tex
-
-
-.PHONY: clean
-clean: ## clean the folder
-	@git clean -d -X -f
-
-
-.PHONY: install
-install: ## install tectonic
-	@curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |sh
-
-
-.PHONY: fmt
-fmt: venv ## Run autoformatting and linting
-	@uv pip install pre-commit
-	@uv run pre-commit install
-	@uv run pre-commit run --all-files
+.PHONY: marimo
+marimo: install ## Install Marimo
+	@uv pip install marimo
+	@uv run marimo edit notebooks
