@@ -1,47 +1,51 @@
-# {{project_name | lower}}
+# {{ project_name }}
 
 This repository has been created using the
 [cradle](https://github.com/cvxgrp/cradle) cli.
 
-Simple Notebook repo without heavy ci/cd.
-
-Good choice for experiments without the ambition to move the
-resulting software further down to pypi, etc. A more complete
-setup is provided in the blueprints for packages.
-
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)]({{ repository }})
 
-## The Makefile
+## Getting Started
 
-Please start the day with
-
-```bash
-make
-```
-
-If you prefer working on a clean sheet do
-
-```bash
-make clean
-```
-
-## The virtual environment
-
-Please use
+### **Set Up Environment**
 
 ```bash
 make install
 ```
 
-to build a virtual environment containing all dependencies declared in your
-`requirements.txt` file. This will run a simple pip install.
+This installs/updates [uv](https://github.com/astral-sh/uv),
+creates your virtual environment and installs dependencies.
 
-## Marimo
-
-We use Marimo (instead of Jupyter) to perform our experiments. Start with
+For adding or removing packages:
 
 ```bash
-make marimo
+uv add/remove requests  # for main dependencies
+uv add/remove requests --dev  # for dev dependencies
 ```
 
-For smaller projects we recommend the installing jupyter route and work locally.
+### **Configure Pre-commit Hooks**
+
+```bash
+make fmt
+```
+
+Installs hooks to maintain code quality and formatting.
+
+## Development Commands
+
+```bash
+make marimo  # Start Marimo notebooks
+```
+
+## Contributing
+
+- Fork the repository
+- Create your feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add some amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+
+## License
+
+The project is licensed under the MIT License - see
+the LICENSE file for details
