@@ -16,11 +16,11 @@ and follows modern and established guidelines.
 
 ## Table of Contents
 
-- [Usage](#usage)
-- [Development Commands](#development-commands)
-- [License](#license)
-- [Contributing](#contributing)
-- [Contact](#contact)
+* [Usage](#usage)
+* [Development Commands](#development-commands)
+* [License](#license)
+* [Contributing](#contributing)
+* [Contact](#contact)
 
 ## Usage
 
@@ -36,7 +36,7 @@ and start using the provided notebooks and tools.
     ```
 
 2. Navigate to the project directory:
-    
+
     ```bash
     cd package
     ```
