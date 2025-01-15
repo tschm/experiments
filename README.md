@@ -4,8 +4,8 @@ This repository is a template for the [cradle](https://github.com/cvxgrp/cradle)
 system.
 
 We support the creation of notebooks without the ambition to release software.
-The repo is not minimalistic but comes with a curated set of pre-commit hooks and
-follows modern and established guidelines.
+The repo is not minimalistic but comes with a curated set of pre-commit hooks
+and follows modern and established guidelines.
 
 * Uses uv for dependency management
 * Offers a list of curated pre-commit hooks
@@ -14,10 +14,32 @@ follows modern and established guidelines.
 * Interactive notebooks with marimo
 * Support of a DevContainer
 
+## Table of Contents
+
+- [Usage](#usage)
+- [Development Commands](#development-commands)
+- [License](#license)
+- [Contributing](#contributing)
+- [Contact](#contact)
+
 ## Usage
 
 This is serving as a feeder into the [cradle](https://github.com/cvxgrp/cradle)
-system only.
+system only. It's not a traditional Python package and does not
+require installation although you could clone the repository
+and start using the provided notebooks and tools.
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/tschm/package.git
+    ```
+
+2. Navigate to the project directory:
+    
+    ```bash
+    cd package
+    ```
 
 ## Development Commands
 
