@@ -132,12 +132,6 @@ def _(np):
 
 @app.cell
 def _(con_3, min_circle_cvx, pos):
-    min_circle_cvx(points=pos, constraints=con_3, solver="MOSEK")
-    return
-
-
-@app.cell
-def _(con_3, min_circle_cvx, pos):
     min_circle_cvx(points=pos, constraints=con_3, solver="CLARABEL")
     return
 
