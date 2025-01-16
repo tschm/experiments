@@ -1,7 +1,8 @@
 # experiments
 
-This repository is a template for the [cradle](https://github.com/cvxgrp/cradle)
-system.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
+[![CI](https://github.com/tschm/experiments/actions/workflows/ci.yml/badge.svg)](https://github.com/tschm/experiments/actions/workflows/ci.yml)
+[![Created for Cradle](https://img.shields.io/badge/Created%20for-Cradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
 
 We support the creation of notebooks without the ambition to release software.
 The repo is not minimalistic but comes with a curated set of pre-commit hooks
@@ -46,11 +47,6 @@ and start using the provided notebooks and tools.
 ```bash
 make fmt     # Install pre-commit hooks and run them on all files
 ```
-
-## License
-
-This project is licensed under the MIT license - see
-the LICENSE file for details.
 
 ## Contributing
 
