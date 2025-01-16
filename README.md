@@ -15,33 +15,6 @@ and follows modern and established guidelines.
 * Interactive notebooks with marimo
 * Support of a DevContainer
 
-## Table of Contents
-
-* [Usage](#usage)
-* [Development Commands](#development-commands)
-* [License](#license)
-* [Contributing](#contributing)
-* [Contact](#contact)
-
-## Usage
-
-This is serving as a feeder into the [cradle](https://github.com/cvxgrp/cradle)
-system only. It's not a traditional Python package and does not
-require installation although you could clone the repository
-and start using the provided notebooks and tools.
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/tschm/package.git
-    ```
-
-2. Navigate to the project directory:
-
-    ```bash
-    cd package
-    ```
-
 ## Development Commands
 
 ```bash
