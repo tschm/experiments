@@ -4,8 +4,8 @@ on:
   push
 
 permissions:
-  contents: write
-
+  checks: write
+  contents: read
 
 jobs:
   install:
@@ -17,6 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # This is not using any github-token:
       - name: Install uv
         shell: bash
         run: |
