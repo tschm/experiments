@@ -30,7 +30,8 @@ jobs:
           # "Verify UV installation"
           uv --version  # Should print the installed version of UV
 
-          echo "*** RUNNING IN ACE? $RUNNING_IN_ACT ***
+          echo "*** RUNNING IN ACE? $RUNNING_IN_ACT ***"
+
       - name: "Set up Python"
         uses: actions/setup-python@v5
         with:
