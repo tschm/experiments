@@ -25,7 +25,7 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           uv --version
           echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
-
+          echo "************ RUNNING IN ACT ${{env.RUNNING_IN_ACT}} ? ************"
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
