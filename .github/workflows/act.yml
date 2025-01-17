@@ -18,3 +18,14 @@ jobs:
       - name: Verify act installation
         run: |
           act --version
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Set Git user name and email for CI/CD
+      - name: Set Git user for CI/CD
+        run: |
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI User"
