@@ -26,6 +26,12 @@ jobs:
           uv --version
           echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
           echo "************ RUNNING IN ACT ${RUNNING_IN_ACT} ? ************"
+          
+          # Set RUNNING_IN_ACT for local testing (act)
+          #- name: Set RUNNING_IN_ACT for local testing (act)
+          echo "ACT=$RUNNING_IN_ACT" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -64,3 +70,8 @@ jobs:
         #  name: marimo-notebooks
         #  path: ./html_exports
         #  retention-days: 7
+
+      # Skipping upload in act environment
+      - name: Skip artifact upload in act environment
+        if: ${{ env.RUNNING_IN_ACT == 'true' }}  # Skip if running in 'act'
+        run: echo "Skipping artifact upload in act environment"
