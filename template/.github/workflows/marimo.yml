@@ -15,13 +15,14 @@ jobs:
         python-version: [ '3.10', '3.11', '3.12', '3.13' ]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
 
-      - name: Check env variable
-        shell: bash
-        run: |
-          echo "ACT in marimo ${{ env.RUNNING_IN_ACT }}?"
-          echo "ACT in marimo2  ${{ RUNNING_IN_ACT }}?"
+      #- name: Check env variable
+      #  shell: bash
+      #  run: |
+      #    echo "ACT in marimo ${{ env.RUNNING_IN_ACT }}?"
+      #    echo "ACT in marimo2  ${{ RUNNING_IN_ACT }}?"
 
       # This is not using any github-token:
       - name: Install uv
