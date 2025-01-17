@@ -25,7 +25,6 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           uv --version
           echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
-          echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
           echo "************ RUNNING IN ACT ${RUNNING_IN_ACT} ? ************"
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,9 +47,20 @@ jobs:
           ' sh {} \;
 
       - name: Upload notebooks
-        if: "$RUNNING_IN_ACT" != "true"
-        uses: actions/upload-artifact@v4
-        with:
-          name: marimo-notebooks
-          path: ./html_exports
-          retention-days: 7
+        #if: ${{ env.RUNNING_IN_ACT != 'true' }}
+        run: |
+          if [ "$RUNNING_IN_ACT" != "true" ]; then
+            echo "Uploading artifacts..."
+            # Here you would use actions/upload-artifact
+            uses: actions/upload-artifact@v3
+            with:
+              name: marimo-notebooks  # The name of the artifact
+              path: ./html_exports  # Path to the directory containing test artifacts
+          else
+            echo "Skipping artifact upload in act environment"
+          fi
+        #uses: actions/upload-artifact@v4
+        #with:
+        #  name: marimo-notebooks
+        #  path: ./html_exports
+        #  retention-days: 7
