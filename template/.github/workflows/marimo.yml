@@ -36,6 +36,7 @@ jobs:
 
           # "Verify UV installation"
           uv --version  # Should print the installed version of UV
+          echo "Environment variable for ACT: ${{ env.RUNNING_IN_ACT }}"
 
       - name: "Set up Python"
         uses: actions/setup-python@v5
