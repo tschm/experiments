@@ -7,6 +7,9 @@ permissions:
   checks: write
   contents: read
 
+env:
+  RUNNING_IN_ACT: true
+
 jobs:
   install:
     runs-on: ubuntu-latest
