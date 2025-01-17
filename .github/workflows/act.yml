@@ -41,7 +41,7 @@ jobs:
           # also act needs to have the commit in place
           git config --global user.email "ci@example.com"
           git config --global user.name "CI User"
-          
+
           git init -b main
           git add .
           git commit -m "Initial commit"
