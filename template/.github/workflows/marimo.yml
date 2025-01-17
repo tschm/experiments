@@ -24,13 +24,13 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           export PATH="$HOME/.local/bin:$PATH"
           uv --version
-          echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
-          echo "************ RUNNING IN ACT ${RUNNING_IN_ACT} ? ************"
+          echo "************ RUNNING IN ACT $ACT ? ************"
+          echo "************ RUNNING IN ACT ${ACT} ? ************"
 
           # Set RUNNING_IN_ACT for local testing (act)
           #- name: Set RUNNING_IN_ACT for local testing (act)
-          echo "ACT=$RUNNING_IN_ACT" >> $GITHUB_ENV
-          echo $GITHUB_ENV
+          #echo "ACT=$ACT" >> $GITHUB_ENV
+          #echo $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v5
