@@ -23,12 +23,6 @@ jobs:
           echo "************ RUNNING IN ACT $ACT ? ************"
           echo "************ RUNNING IN ACT ${ACT} ? ************"
           echo "************ RUNNING IN ACT ${{ env.ACT2 }} ? ************"
-          echo "************ RUNNING IN ACT ${{ env.ACT2 } ? ************"
-          
-          # Set RUNNING_IN_ACT for local testing (act)
-          #- name: Set RUNNING_IN_ACT for local testing (act)
-          #echo "ACT=$ACT" >> $GITHUB_ENV
-          #echo $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v5
