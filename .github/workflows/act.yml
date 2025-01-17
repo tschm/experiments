@@ -14,33 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install act
-        run: |
-          curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-          # Add the installation directory to PATH
-          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-
-      #- name: Check env variable
-      #  run: |
-      #    echo "ACT ${{ env.RUNNING_IN_ACT }}?"
-
-      - name: Verify act installation
-        run: |
-          act --version
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Launch the cradle
+        uses: cvxgrp/cradle/actions/cradle@main
         with:
-          python-version: ${{ matrix.python-version }}
+            python-version: '3.12'
 
-      - name: Install and run copier
+      - name: Run copier
         working-directory: .
         shell: bash
         run: |
-          python -m pip install --upgrade pip
-          # so we get the updates of copier if we hide in requirements file
-          pip install --no-cache-dir -r requirements.txt
-          # mkdir -p template
           copier copy . template --data-file .github/data.yaml
 
       - name: Prepare the repo
@@ -49,9 +31,6 @@ jobs:
         run: |
           # otherwise the pre-commit hooks won't "see" files
           # also act needs to have the commit in place
-          git config --global user.email "ci@example.com"
-          git config --global user.name "CI User"
-
           git init -b main
           git add .
           git commit -m "Initial commit"
