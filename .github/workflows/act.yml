@@ -29,3 +29,18 @@ jobs:
         run: |
           git config --global user.email "ci@example.com"
           git config --global user.name "CI User"
+
+      - name: Install and run copier
+        working-directory: .
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install --no-cache-dir -r requirements.txt
+          mkdir -p template
+          copier copy . template --data-file .github/data.yaml
+          cd template
+          # otherwise the pre-commit hooks won't "see" files
+          # also act needs to have the commit in place
+          git init -b main
+          git add .
+          git commit -m "Initial commit"
