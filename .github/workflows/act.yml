@@ -45,7 +45,7 @@ jobs:
         uses: cvxgrp/cradle/actions/flow@main
         with:
           workflow: marimo.yml
-          
+
         #id: flow_marimo
         #working-directory: template
         #run: |
