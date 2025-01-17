@@ -1,7 +1,7 @@
 # experiments
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
-[![CI](https://github.com/tschm/experiments/actions/workflows/ci.yml/badge.svg)](https://github.com/tschm/experiments/actions/workflows/ci.yml)
+[![CI](https://github.com/tschm/experiments/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/experiments/actions/workflows/act.yml)
 [![Created for Cradle](https://img.shields.io/badge/Created%20for-Cradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
 
 We support the creation of notebooks without the ambition to release software.
