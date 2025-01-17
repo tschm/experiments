@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Launch the cradle
-        uses: cradle/actions/cradle@main
+        uses: cvxgrp/cradle/actions/cradle@main
         with:
             python-version: '3.12'
       #- name: Install act
