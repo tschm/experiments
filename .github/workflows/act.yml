@@ -23,6 +23,10 @@ jobs:
           # Add the installation directory to PATH
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
 
+      - name: Check env variable
+        run: |
+          echo "ACT ${{ env.RUNNING_IN_ACT }}?"
+
       - name: Verify act installation
         run: |
           act --version
