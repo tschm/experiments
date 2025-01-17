@@ -52,26 +52,25 @@ jobs:
             uv run marimo export html "$1" -o "html_exports/${filename}.html"
           ' sh {} \;
 
-      - name: Upload notebooks
-        #if: ${{ env.RUNNING_IN_ACT != 'true' }}
-        run: |
-          if [ "$RUNNING_IN_ACT" != "true" ]; then
-            echo "Uploading artifacts..."
-            # Here you would use actions/upload-artifact
-            uses: actions/upload-artifact@v3
-            with:
-              name: marimo-notebooks  # The name of the artifact
-              path: ./html_exports  # Path to the directory containing test artifacts
-          else
-            echo "Skipping artifact upload in act environment"
-          fi
-        #uses: actions/upload-artifact@v4
-        #with:
-        #  name: marimo-notebooks
-        #  path: ./html_exports
-        #  retention-days: 7
+#      - name: Upload notebooks
+#        #if: ${{ env.RUNNING_IN_ACT != 'true' }}
+#        run: |
+#          if [ "$RUNNING_IN_ACT" != "true" ]; then
+#            echo "Uploading artifacts..."
+#            # Here you would use actions/upload-artifact
+#            uses: actions/upload-artifact@v3
+#            with:
+#              name: marimo-notebooks  # The name of the artifact
+#              path: ./html_exports  # Path to the directory containing test artifacts
+#          else
+#            echo "Skipping artifact upload in act environment"
+#          fi
 
       # Skipping upload in act environment
       - name: Skip artifact upload in act environment
-        if: ${{ env.RUNNING_IN_ACT == 'true' }}  # Skip if running in 'act'
+        if: ${{ env.ACT == 'true' }}  # Skip if running in 'act'
         run: echo "Skipping artifact upload in act environment"
+
+      - name: Upload if not environment
+        if: ${{ env.ACT != 'true' }}  # Skip if running in 'act'
+        run: echo "Upload"
