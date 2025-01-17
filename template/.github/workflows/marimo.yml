@@ -19,8 +19,8 @@ jobs:
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
           # Add UV to PATH for the current shell session
-          echo "$HOME/.astral/uv/bin" >> $GITHUB_ENV  # Add UV binary directory to PATH in GitHub Actions environment
-          export PATH="$HOME/.astral/uv/bin:$PATH"  # Add UV binary directory to PATH for the current shell session
+          echo "$HOME/.local/bin" >> $GITHUB_ENV  # Add UV binary directory to PATH in GitHub Actions environment
+          export PATH="$HOME/.local/bin:$PATH"    # Add UV binary directory to PATH for the current shell session
 
           # Verify UV installation
           uv --version  # Should print the installed version of UV
