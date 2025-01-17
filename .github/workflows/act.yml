@@ -29,6 +29,7 @@ jobs:
         shell: bash
         run: |
           python -m pip install --upgrade pip
+          # so we get the updates of copier if we hide in requirements file
           pip install --no-cache-dir -r requirements.txt
           # mkdir -p template
           copier copy . template --data-file .github/data.yaml
