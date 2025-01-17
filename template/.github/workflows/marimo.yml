@@ -20,7 +20,6 @@ jobs:
 
       # This is not using any github-token:
       - name: Install uv
-        shell: bash
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
@@ -32,6 +31,7 @@ jobs:
           uv --version  # Should print the installed version of UV
           echo "Environment variable for ACT: ${{ env.RUNNING_IN_ACT }}"
           echo "******** Environment variable for ACT: ${{ RUNNING_IN_ACT }}"
+
       - name: "Set up Python"
         uses: actions/setup-python@v5
         with:
