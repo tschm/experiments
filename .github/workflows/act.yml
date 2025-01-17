@@ -60,9 +60,9 @@ jobs:
         id: flow_marimo
         working-directory: template
         run: |
-          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT=true
+          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT='true'
         env:
-          ACT: true
+          ACT: 'true'
 
       - name: Run the pre-commit flow
         id: flow_pre_commit
