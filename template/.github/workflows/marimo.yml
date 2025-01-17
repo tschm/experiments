@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 env:
-  RUNNING_IN_ACT: true
+  RUNNING_IN_ACT2: true
 
 jobs:
   install:
@@ -24,6 +24,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           export PATH="$HOME/.local/bin:$PATH"
           uv --version
+          echo "************ RUNNING IN ACT $RUNNING_IN_ACT ? ************"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -46,7 +47,7 @@ jobs:
           ' sh {} \;
 
       - name: Upload notebooks
-        if: ${{ !env.RUNNING_IN_ACT }}
+        if: ${{ !env.RUNNING_IN_ACT2 }}
         uses: actions/upload-artifact@v4
         with:
           name: marimo-notebooks
