@@ -41,11 +41,15 @@ jobs:
           git add .
           git commit -m "Initial commit"
 
-      - name: Run the marimo flow
-        id: flow_marimo
-        working-directory: template
-        run: |
-          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT='true'
+      - name: Test Marimo flow
+        uses: cvxgrp/cradle/actions/flow@main
+        with:
+          workflow: marimo.yml
+          
+        #id: flow_marimo
+        #working-directory: template
+        #run: |
+        #  act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT='true'
 
       - name: Run the pre-commit flow
         id: flow_pre_commit
