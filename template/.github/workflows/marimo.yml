@@ -18,12 +18,6 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      #- name: Check env variable
-      #  shell: bash
-      #  run: |
-      #    echo "ACT in marimo ${{ env.RUNNING_IN_ACT }}?"
-      #    echo "ACT in marimo2  ${{ RUNNING_IN_ACT }}?"
-
       # This is not using any github-token:
       - name: Install uv
         shell: bash
@@ -37,7 +31,7 @@ jobs:
           # "Verify UV installation"
           uv --version  # Should print the installed version of UV
           echo "Environment variable for ACT: ${{ env.RUNNING_IN_ACT }}"
-
+          echo "******** Environment variable for ACT: ${{ RUNNING_IN_ACT }}"
       - name: "Set up Python"
         uses: actions/setup-python@v5
         with:
@@ -62,7 +56,7 @@ jobs:
           done
 
       - name: Upload notebooks
-        if: ${{ !env.RUNNING_IN_ACT }}
+        if: ${{ !RUNNING_IN_ACT }}
         uses: actions/upload-artifact@v4
         with:
           name: pdoc
