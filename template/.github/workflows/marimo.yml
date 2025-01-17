@@ -21,6 +21,7 @@ jobs:
         shell: bash
         run: |
           echo "ACT in marimo ${{ env.RUNNING_IN_ACT }}?"
+          echo "ACT in marimo2  ${{ RUNNING_IN_ACT }}?"
 
       # This is not using any github-token:
       - name: Install uv
