@@ -22,7 +22,8 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_ENV  # Add UV binary directory to PATH in GitHub Actions environment
           export PATH="$HOME/.local/bin:$PATH"    # Add UV binary directory to PATH for the current shell session
 
-          # Verify UV installation
+      - name: "Verify UV installation"
+        run: |
           uv --version  # Should print the installed version of UV
 
       - name: "Set up Python"
