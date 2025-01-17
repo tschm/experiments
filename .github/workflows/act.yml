@@ -62,7 +62,7 @@ jobs:
         run: |
           act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest -e ACT=true
         env:
-          RUNNING_IN_ACT: true
+          ACT: true
 
       - name: Run the pre-commit flow
         id: flow_pre_commit
