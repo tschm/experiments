@@ -52,3 +52,10 @@ jobs:
               uv run marimo export html "$file" -o "html_exports/${filename}.html"
             fi
           done
+
+      - name: Upload notebooks
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdoc
+          path: ./html_exports
+          retention-days: 1
