@@ -7,9 +7,6 @@ permissions:
   checks: write
   contents: read
 
-env:
-  RUNNING_IN_ACT2: true
-
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -18,7 +15,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install uv
-        shell: bash
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -26,7 +22,9 @@ jobs:
           uv --version
           echo "************ RUNNING IN ACT $ACT ? ************"
           echo "************ RUNNING IN ACT ${ACT} ? ************"
-
+          echo "************ RUNNING IN ACT ${{ env.ACT2 }} ? ************"
+          echo "************ RUNNING IN ACT ${{ env.ACT2 } ? ************"
+          
           # Set RUNNING_IN_ACT for local testing (act)
           #- name: Set RUNNING_IN_ACT for local testing (act)
           #echo "ACT=$ACT" >> $GITHUB_ENV
