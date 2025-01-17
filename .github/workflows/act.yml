@@ -60,7 +60,7 @@ jobs:
         id: flow_marimo
         working-directory: template
         run: |
-          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT=true --env=file=.github/my-act.env
+          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest --env ACT=true
         env:
           ACT: true
 

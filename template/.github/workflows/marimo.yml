@@ -21,8 +21,6 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           uv --version
           echo "************ RUNNING IN ACT $ACT ? ************"
-          echo "************ RUNNING IN ACT ${ACT} ? ************"
-          echo "************ RUNNING IN ACT ${{ env.ACT2 }} ? ************"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -60,7 +58,7 @@ jobs:
 
       # Skipping upload in act environment
       - name: Skip artifact upload in act environment
-        if: ${{ env.ACT == 'true' }}  # Skip if running in 'act'
+        if: ${{ env.ACT }}  # Skip if running in 'act'
         run: echo "Skipping artifact upload in act environment"
 
       - name: Upload if not environment
