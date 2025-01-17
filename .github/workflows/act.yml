@@ -50,3 +50,10 @@ jobs:
         working-directory: template
         run: |
           act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
+
+      - name: Run the pre-commit flow
+        id: flow_pre_commit
+        shell: bash
+        working-directory: template
+        run: |
+          act -W .github/workflows/pre-commit.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
