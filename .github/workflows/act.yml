@@ -3,6 +3,9 @@ name: Test Template Workflows
 on:
   push:
 
+env:
+  RUNNING_IN_ACT: true
+
 jobs:
   test-template-workflows:
     strategy:
