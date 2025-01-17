@@ -22,6 +22,11 @@ jobs:
           uv --version
           echo "************ RUNNING IN ACT $ACT ? ************"
 
+      #- name: Upload if not environment
+      #  if: ${{ env.ACT != true }}
+      #  run: |
+      #    echo "ACT=true" >> $GITHUB_ENV
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -62,7 +67,7 @@ jobs:
       #  run: echo "Skipping artifact upload in act environment"
 
       - name: Upload if not environment
-        if: ${{ env.ACT != true }}  # Skip if running in 'act'
+        if: ${{ env.ACT != 'true' }}  # Skip if running in 'act'
         uses: actions/upload-artifact@v3
         with:
           name: marimo-notebooks  # The name of the artifact
