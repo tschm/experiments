@@ -44,6 +44,7 @@ jobs:
       - name: Test Marimo flow
         uses: cvxgrp/cradle/actions/flow@main
         with:
+          working-directory: template
           workflow: marimo.yml
 
         #id: flow_marimo
