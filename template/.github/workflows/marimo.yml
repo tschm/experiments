@@ -4,31 +4,41 @@ on:
   push
 
 permissions:
-  contents: read
+  contents: write
 
 
 jobs:
   install:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.10', '3.12' ]
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          python-version: '3.12'
+        shell: bash
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Create virtual environment
+          # Add UV to PATH for the current shell session
+          echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
+          export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
+
+          # "Verify UV installation"
+          uv --version  # Should print the installed version of UV
+
+      - name: "Set up Python"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Create venv and install dependencies + marimo
         run: |
           uv venv
-
-      - name: Install dependencies with uv
-        run: |
           uv pip install --no-cache-dir  -r requirements.txt
-
-      - name: Install marimo
-        run: |
-          uv pip install --no-cache-dir  marimo
+          uv pip install --no-cache-dir marimo
 
       - name: Convert notebooks to HTML
         run: |

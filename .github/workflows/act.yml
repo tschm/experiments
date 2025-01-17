@@ -1,0 +1,66 @@
+name: Test Template Workflows
+
+on:
+  push:
+
+jobs:
+  test-template-workflows:
+    strategy:
+      matrix:
+        python-version: [ '3.10', '3.12' ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install act
+        run: |
+          curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+          # Add the installation directory to PATH
+          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+
+      - name: Verify act installation
+        run: |
+          act --version
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install and run copier
+        working-directory: .
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          # so we get the updates of copier if we hide in requirements file
+          pip install --no-cache-dir -r requirements.txt
+          # mkdir -p template
+          copier copy . template --data-file .github/data.yaml
+
+      - name: Prepare the repo
+        working-directory: template
+        shell: bash
+        run: |
+          # otherwise the pre-commit hooks won't "see" files
+          # also act needs to have the commit in place
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI User"
+
+          git init -b main
+          git add .
+          git commit -m "Initial commit"
+
+      - name: Run the marimo flow
+        id: flow_marimo
+        working-directory: template
+        run: |
+          act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
+
+      - name: Run the pre-commit flow
+        id: flow_pre_commit
+        shell: bash
+        working-directory: template
+        run: |
+          act -W .github/workflows/pre-commit.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
