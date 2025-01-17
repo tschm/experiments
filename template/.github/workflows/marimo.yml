@@ -3,13 +3,8 @@ name: MARIMO
 on:
   push
 
-permissions:
-  checks: write
-  contents: read
-
 jobs:
-  install:
-
+  marimo2html:
     runs-on: "ubuntu-latest"
 
     strategy:
