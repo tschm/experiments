@@ -9,7 +9,9 @@ permissions:
 
 jobs:
   install:
-    runs-on: ubuntu-latest
+
+    runs-on: "ubuntu-latest"
+
     strategy:
       matrix:
         python-version: [ '3.10', '3.12' ]
@@ -29,7 +31,7 @@ jobs:
 
           # "Verify UV installation"
           uv --version  # Should print the installed version of UV
-          echo "Environment variable for ACT: ${{ RUNNING_IN_ACT }}"
+          echo "Environment variable for ACT: $RUNNING_IN_ACT"
 
       - name: "Set up Python"
         uses: actions/setup-python@v5
