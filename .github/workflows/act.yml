@@ -3,8 +3,8 @@ name: Test Template Workflows
 on:
   push:
 
-env:
-  RUNNING_IN_ACT: true
+#env:
+#  RUNNING_IN_ACT: true
 
 jobs:
   test-template-workflows:
@@ -23,9 +23,9 @@ jobs:
           # Add the installation directory to PATH
           echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
 
-      - name: Check env variable
-        run: |
-          echo "ACT ${{ env.RUNNING_IN_ACT }}?"
+      #- name: Check env variable
+      #  run: |
+      #    echo "ACT ${{ env.RUNNING_IN_ACT }}?"
 
       - name: Verify act installation
         run: |
@@ -64,6 +64,8 @@ jobs:
         working-directory: template
         run: |
           act -W .github/workflows/marimo.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
+        env:
+          RUNNING_IN_ACT: true
 
       - name: Run the pre-commit flow
         id: flow_pre_commit
@@ -71,3 +73,5 @@ jobs:
         working-directory: template
         run: |
           act -W .github/workflows/pre-commit.yml -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest
+        env:
+          RUNNING_IN_ACT: true
