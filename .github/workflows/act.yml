@@ -18,4 +18,3 @@ jobs:
       - name: Verify act installation
         run: |
           act --version
-
