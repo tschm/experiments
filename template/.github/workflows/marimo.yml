@@ -1,7 +1,7 @@
 name: MARIMO
 
 on:
-  push
+  push:
 
 permissions:
   checks: write
@@ -10,45 +10,65 @@ permissions:
 jobs:
   install:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [ '3.10', '3.11', '3.12', '3.13' ]
 
     steps:
       - uses: actions/checkout@v4
 
-      # This is not using any github-token:
       - name: Install uv
-        shell: bash
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.local/bin:$PATH"
+          uv --version
+          echo "************ RUNNING IN ACT $ACT ? ************"
 
-          # Add UV to PATH for the current shell session
-          echo "$HOME/.local/bin" >> $GITHUB_PATH   # Add UV binary directory to PATH in GitHub Actions environment
-          export PATH="$HOME/.local/bin:$PATH"      # Add UV binary directory to PATH for the current shell session
+      #- name: Upload if not environment
+      #  if: ${{ env.ACT != true }}
+      #  run: |
+      #    echo "ACT=true" >> $GITHUB_ENV
 
-          # "Verify UV installation"
-          uv --version  # Should print the installed version of UV
-
-      - name: "Set up Python"
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.12'
 
-      - name: Create venv and install dependencies + marimo
+      - name: Create venv and install dependencies
         run: |
           uv venv
-          uv pip install --no-cache-dir  -r requirements.txt
+          uv pip install --no-cache-dir -r requirements.txt
           uv pip install --no-cache-dir marimo
 
       - name: Convert notebooks to HTML
         run: |
           mkdir -p html_exports
-          for file in notebooks/*.py; do
-            if [ -f "$file" ]; then
-              filename=$(basename "$file" .py)
-              echo "Converting $filename.py to HTML..."
-              # Can't work as it relies on license files not part of this repo
-              uv run marimo export html "$file" -o "html_exports/${filename}.html"
-            fi
-          done
+          find notebooks -name "*.py" -type f -exec sh -c '
+            filename=$(basename "$1" .py)
+            echo "Converting $filename.py to HTML..."
+            uv run marimo export html "$1" -o "html_exports/${filename}.html"
+          ' sh {} \;
+
+#      - name: Upload notebooks
+#        #if: ${{ env.RUNNING_IN_ACT != 'true' }}
+#        run: |
+#          if [ "$RUNNING_IN_ACT" != "true" ]; then
+#            echo "Uploading artifacts..."
+#            # Here you would use actions/upload-artifact
+#            uses: actions/upload-artifact@v3
+#            with:
+#              name: marimo-notebooks  # The name of the artifact
+#              path: ./html_exports  # Path to the directory containing test artifacts
+#          else
+#            echo "Skipping artifact upload in act environment"
+#          fi
+
+      # Skipping upload in act environment
+      #- name: Skip artifact upload in act environment
+      #  if: ${{ env.ACT }}  # Skip if running in 'act'
+      #  run: echo "Skipping artifact upload in act environment"
+
+      - name: Upload if not environment
+        if: ${{ env.ACT != 'true' }}  # Skip if running in 'act'
+        uses: actions/upload-artifact@v3
+        with:
+          name: marimo-notebooks  # The name of the artifact
+          path: ./html_exports  # Path to the directory containing test artifacts
