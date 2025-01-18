@@ -12,13 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install act
-        run: |
-          curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-          # Add the installation directory to PATH
-          echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
 
       - name: Launch the cradle
         uses: cvxgrp/cradle/actions/cradle@main
