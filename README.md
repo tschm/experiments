@@ -1,8 +1,8 @@
-# experiments - cradle template
+# experiments - qCradle template
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![CI](https://github.com/tschm/experiments/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/experiments/actions/workflows/act.yml)
-[![Created for Cradle](https://img.shields.io/badge/Created%20for-Cradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
+[![Created for qCradle](https://img.shields.io/badge/Created%20for-qCradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
 
 We support the creation of notebooks without the ambition to release software.
 The repo is not minimalistic but comes with a curated set of pre-commit hooks
