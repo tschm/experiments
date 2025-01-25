@@ -1,42 +1,36 @@
 name: Bump version
-
 on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Get contributors
-        id: contributors
-        uses: crazy-max/ghaction-github-contributors@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          includeBot: false
-          includeCollaborators: true
-          includeContributors: true
-
+          fetch-depth: 0
+      
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
+      
+      - name: Generate release body
+        id: release_body
+        run: |
+          echo "## Commits" > release_body.md
+          git log ${{ steps.tag_version.outputs.previous_tag }}..${{ steps.tag_version.outputs.new_tag }} --pretty=format:"- %s" >> release_body.md
+          echo "" >> release_body.md
+          echo "## Contributors" >> release_body.md
+          git log ${{ steps.tag_version.outputs.previous_tag }}..${{ steps.tag_version.outputs.new_tag }} --pretty=format:"%an" | sort | uniq >> release_body.md
+      
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
           name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: |
-            ### Changelog
-            ${{ steps.tag_version.outputs.changelog }}
-
-            ### Contributors
-            ${{ steps.contributors.outputs.contributors }}
+          bodyFile: release_body.md
