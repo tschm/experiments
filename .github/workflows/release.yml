@@ -22,11 +22,12 @@ jobs:
       - name: Generate release body
         id: release_body
         run: |
+          # Use git log with more flexible revision specification
           echo "## Commits" > release_body.md
-          git log ${{ steps.tag_version.outputs.previous_tag }}..${{ steps.tag_version.outputs.new_tag }} --pretty=format:"- %s" >> release_body.md
+          git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> release_body.md
           echo "" >> release_body.md
           echo "## Contributors" >> release_body.md
-          git log ${{ steps.tag_version.outputs.previous_tag }}..${{ steps.tag_version.outputs.new_tag }} --pretty=format:"%an" | sort | uniq >> release_body.md
+          git log --pretty=format:"%an" $(git describe --tags --abbrev=0 HEAD^)..HEAD | sort | uniq >> release_body.md
       
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
