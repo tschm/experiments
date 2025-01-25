@@ -12,13 +12,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Generate release body
         id: release_body
         run: |
@@ -28,7 +28,7 @@ jobs:
           echo "" >> release_body.md
           echo "## Contributors" >> release_body.md
           git log --pretty=format:"%an" $(git describe --tags --abbrev=0 HEAD^)..HEAD | sort | uniq >> release_body.md
-      
+
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
