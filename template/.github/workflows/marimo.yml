@@ -23,14 +23,9 @@ jobs:
           uv --version
           echo "************ RUNNING IN ACT $ACT ? ************"
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
       - name: Create venv and install dependencies
         run: |
-          uv venv
+          uv venv --python '3.12'
           uv pip install --no-cache-dir -r requirements.txt
           uv pip install --no-cache-dir marimo
 
