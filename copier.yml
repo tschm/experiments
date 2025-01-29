@@ -8,3 +8,4 @@
 # Earliest version with "multiselect" support.
 _min_copier_version: "9.1.0"
 _subdirectory: "template"
+_answers_file: .copier-answers.yml
