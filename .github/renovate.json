@@ -7,9 +7,7 @@
   "pre-commit": {
     "enabled": true
   },
-  
-  // Schedule when updates are checked
-  "schedule": ["every Friday", "before 8am"],
+  "schedule": ["every friday", "before 8am"],
   "packageRules": [
     {
       "groupName": "pre-commit hooks",
