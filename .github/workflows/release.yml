@@ -1,21 +1,13 @@
 name: Bump version
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: ["CI"] # Name of the test workflow
-    types:
-      - completed
+  workflow_dispatch
 
 permissions:
   contents: write
 
 jobs:
   build:
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout [${{ github.repository }}]
