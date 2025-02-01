@@ -24,7 +24,7 @@ jobs:
         working-directory: .
         shell: bash
         run: |
-          copier copy . template --data-file .github/data.yaml
+          copier copy . template --data-file .github/resources/data.yaml
 
       - name: Prepare the repo
         working-directory: template
