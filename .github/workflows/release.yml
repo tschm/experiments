@@ -15,9 +15,6 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' &&
             github.ref == 'refs/heads/main' }}  # Ensure CI passed and we are on main branch
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
       - name: Generate Tag
         uses: cvxgrp/.github/actions/uv/tag@v2.0.17
         with:
