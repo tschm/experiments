@@ -5,6 +5,8 @@ on:
     workflows: ["CI"]  # The name of your CI workflow
     types:
       - completed
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -12,8 +14,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' &&
-            github.ref == 'refs/heads/main' }}  # Ensure CI passed and we are on main branch
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Ensure CI passed and we are on main branch
     steps:
       - name: Generate Tag
         uses: cvxgrp/.github/actions/tag@v2.2.1
