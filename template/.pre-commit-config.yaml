@@ -32,7 +32,7 @@ repos:
 
       - id: check-renovate
         args: [ "--verbose" ]
-        
+
       - id: check-github-workflows
         args: ["--verbose"]
 
