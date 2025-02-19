@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Launch the cradle
-        uses: cvxgrp/cradle/actions/cradle@main
+        uses: tschm/cradle/actions/cradle@main
         with:
             python-version: '3.12'
 
@@ -37,19 +37,19 @@ jobs:
           git commit -m "Initial commit"
 
       - name: Test Marimo flow
-        uses: cvxgrp/cradle/actions/flow@main
+        uses: tschm/cradle/actions/flow@main
         with:
           working-directory: template
           workflow: marimo.yml
 
       - name: Test pre-commit flow
-        uses: cvxgrp/cradle/actions/flow@main
+        uses: tschm/cradle/actions/flow@main
         with:
           working-directory: template
           workflow: pre-commit.yml
 
       - name: Test ci flow
-        uses: cvxgrp/cradle/actions/flow@main
+        uses: tschm/cradle/actions/flow@main
         with:
           working-directory: template
           workflow: ci.yml
