@@ -35,7 +35,6 @@ jobs:
           git init -b main
           git add .
           git commit -m "Initial commit"
-          git fetch origin 2>/dev/null || true
 
       - name: Test Marimo flow
         uses: tschm/cradle/actions/flow@main
