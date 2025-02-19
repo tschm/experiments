@@ -30,6 +30,9 @@ repos:
       - id: check-dependabot
         args: [ "--verbose" ]
 
+      - id: check-renovate
+        args: [ "--verbose" ]
+
       - id: check-github-workflows
         args: ["--verbose"]
 
