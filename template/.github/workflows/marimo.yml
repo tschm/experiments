@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: cvxgrp/.github/actions/environment@v2.2.5
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
 
-      - uses: cvxgrp/.github/actions/marimo@v2.2.5
+      - name: "Build the virtual environment for ${{ github.repository }}"
+        uses: ./.github/actions/environment
+
+      - uses: ./.github/actions/marimo
         with:
           source_folder: 'notebooks'
