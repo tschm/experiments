@@ -15,6 +15,6 @@ jobs:
       - name: "Build the virtual environment for ${{ github.repository }}"
         uses: cvxgrp/.github/actions/environment@v2.2.5
 
-      - uses: cvxgrp/.github/actions/marimo@v2.2.5
+      - uses: ./.github/actions/marimo
         with:
           source_folder: 'notebooks'
