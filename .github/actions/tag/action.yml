@@ -15,13 +15,7 @@ runs:
   using: "composite"
   steps:
     # -----------------------------------------------------------------------------
-    # Step 1: Checkout the repository
-    # -----------------------------------------------------------------------------
-    - name: Checkout [${{ github.repository }}]
-      uses: actions/checkout@v4
-
-    # -----------------------------------------------------------------------------
-    # Step 2: Bump version and tag
+    # Step 1: Bump version and tag
     # -----------------------------------------------------------------------------
     - name: Bump version and tag
       id: tag_version
@@ -30,7 +24,7 @@ runs:
         github_token: ${{ inputs.github_token }}
 
     # -----------------------------------------------------------------------------
-    # Step 3: Create GitHub release
+    # Step 2: Create GitHub release
     # -----------------------------------------------------------------------------
     - name: Create GitHub release without artifacts
       uses: softprops/action-gh-release@v2
