@@ -5,10 +5,6 @@ on:
 
 jobs:
   test-template-workflows:
-    strategy:
-      matrix:
-        python-version: [ '3.12' ]
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,22 +12,18 @@ jobs:
         uses: tschm/cradle/actions/cradle@main
         with:
             python-version: '3.12'
-            destination-path: 'template'
 
       - name: Test Marimo flow
         uses: tschm/cradle/actions/flow@main
         with:
-          working-directory: template
           workflow: marimo.yml
 
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:
-          working-directory: template
           workflow: pre-commit.yml
 
       - name: Test ci flow
         uses: tschm/cradle/actions/flow@main
         with:
-          working-directory: template
           workflow: ci.yml
