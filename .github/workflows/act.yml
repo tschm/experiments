@@ -27,8 +27,3 @@ jobs:
         uses: tschm/cradle/actions/flow@main
         with:
           workflow: ci.yml
-
-      - name: Test latex flow
-        uses: tschm/cradle/actions/flow@main
-        with:
-          workflow: latex.yml
