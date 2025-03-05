@@ -2,3 +2,4 @@ project_name: maffay
 username: tschm
 repository: http://www.spiegel.de
 use_devcontainer: true
+use_latex: false
