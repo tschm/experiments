@@ -1,3 +1,7 @@
 project_name: maffay
 username: tschm
 repository: http://www.spiegel.de
+use_devcontainer: false
+use_latex: true
+use_dependabot: false
+use_renovate: false
