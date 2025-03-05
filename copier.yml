@@ -9,6 +9,16 @@ use_latex:
     type: bool
     default: false
     help: Do you want to add a LaTeX document?
+
+use_dependabot:
+    type: bool
+    default: false
+    help: Do you want to use Dependabot?
+
+use_renovate:
+    type: bool
+    default: false
+    help: Do you want to use Renovate?
 ---
 
 # Require that the user has at least Copier v9.1.0 installed
