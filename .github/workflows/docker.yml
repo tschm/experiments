@@ -1,0 +1,19 @@
+name: DOCKER
+
+on:
+  push:
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Launch the cradle
+        uses: tschm/cradle/actions/cradle@main
+        with:
+            python-version: '3.12'
+
+      - name: Build Docker image
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: docker.yml
