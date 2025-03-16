@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  marimo:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,4 @@ jobs:
       - name: Build container image
         shell: bash
         run: |
-          podman build -f ${{ inputs.dockerfile-path }}
+          podman build -f docker/Dockerfile
