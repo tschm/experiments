@@ -36,3 +36,17 @@ runs:
       shell: bash
       run: |
           echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
+
+    # -----------------------------------------------------------------------------
+    # Step 3: (optional) build DockerImage
+    # -----------------------------------------------------------------------------
+    - name: Install podman
+      shelL: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y podman
+
+    - name: Login to GitHub container registry
+      shell: bash
+      run: |
+        podman login ghcr.io -u ${{ github.actor }} -p ${{ inputs.github_token }}

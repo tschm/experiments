@@ -19,6 +19,11 @@ use_renovate:
     type: bool
     default: false
     help: Do you want to use Renovate?
+
+use_docker:
+    type: bool
+    default: false
+    help: Do you want to build a Docker container
 ---
 
 # Require that the user has at least Copier v9.1.0 installed
