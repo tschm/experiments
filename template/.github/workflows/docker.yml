@@ -15,7 +15,7 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      - name: Install podman
+      - name: Install docker
         shell: bash
         run: |
           sudo apt-get update -qq
@@ -24,4 +24,5 @@ jobs:
       - name: Build container image
         shell: bash
         run: |
+          pwd
           docker build -f docker/Dockerfile .
