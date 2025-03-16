@@ -6,7 +6,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 'v0.9.9'
+    rev: 'v0.11.0'
     hooks:
       - id: ruff
         args: [ --fix, --exit-non-zero-on-fix ]
@@ -25,7 +25,7 @@ repos:
       - id: pyupgrade
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.2
+    rev: 0.31.3
     hooks:
       - id: check-dependabot
         args: [ "--verbose" ]
@@ -37,7 +37,7 @@ repos:
         args: ["--verbose"]
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.30.1
+    rev: v1.30.2
     hooks:
       - id: typos
         exclude: ^\.gitignore|\.copier.answers$

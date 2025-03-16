@@ -12,7 +12,7 @@ repos:
       - id: markdownlint
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.30.0
+    rev: v1.30.2
     hooks:
       - id: typos
         exclude: ^\.gitignore|\.copier.answers$
