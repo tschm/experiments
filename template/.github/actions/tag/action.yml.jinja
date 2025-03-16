@@ -50,5 +50,5 @@ runs:
     - name: Login to GitHub container registry
       shell: bash
       run: |
-        podman login ghcr.io -u ${% raw %${{ github.actor }}{% endraw %} -p ${% raw %${{ inputs.github_token }}{% endraw %}
+        podman login ghcr.io -u ${% raw %}${{ github.actor }}{% endraw %} -p ${% raw %}${{ inputs.github_token }}{% endraw %}
 {% endif %}
