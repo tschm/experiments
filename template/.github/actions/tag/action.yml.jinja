@@ -40,25 +40,28 @@ runs:
     # Step 3: (optional) build DockerImage
     # -----------------------------------------------------------------------------
 {% if use_docker %}
-    - name: Install podman
+    - name: Install docker
       shell: bash
       run: |
-        sudo apt-get update -qq
-        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
 
     - name: Login to GitHub container registry
       shell: bash
       run: |
-        podman login ghcr.io \
+        docker login ghcr.io \
         -u {% raw %}${{ github.actor }}{% endraw %} \
         -p {% raw %}${{ inputs.github_token }}{% endraw %}
 
     - name: Build container image
       shell: bash
       run: |
-        podman build \
+        pwd
+        ls -all
+        docker build \
           --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
-          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %}
+          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %} \
+          .
 {% endif %}
 
     - name: Debug Output Tag
