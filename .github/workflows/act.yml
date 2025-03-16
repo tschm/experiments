@@ -17,6 +17,11 @@ jobs:
         run: |
           cat .github/actions/tag/action.yml
 
+      - name: Build Docker image
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: docker.yml
+
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:

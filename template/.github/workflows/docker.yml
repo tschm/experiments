@@ -1,0 +1,27 @@
+name: DOCKER
+
+on:
+  push:
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  marimo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - name: Install podman
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
+
+      - name: Build container image
+        shell: bash
+        run: |
+          podman build -f ${{ inputs.dockerfile-path }}
