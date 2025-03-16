@@ -5,11 +5,15 @@ inputs:
   github_token:
     description: "GitHub token for authentication"
     required: true
+  dockerfile-path:
+    description: 'Path to the Dockerfile.'
+    required: false
+    default: 'docker/Dockerfile'
 
 outputs:
   tag:
     description: 'A new tag'
-    value: ${% raw %}{{ steps.tag_version.outputs.new_tag }}{% endraw %}
+    value: {% raw %}{{ steps.tag_version.outputs.new_tag }}{% endraw %}
 
 runs:
   using: "composite"
@@ -21,7 +25,7 @@ runs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.2
       with:
-        github_token: ${% raw %}${{ inputs.github_token }}{% endraw %}
+        github_token: {% raw %}${{ inputs.github_token }}{% endraw %}
 
     # -----------------------------------------------------------------------------
     # Step 2: Create GitHub release
@@ -29,13 +33,13 @@ runs:
     - name: Create GitHub release without artifacts
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+        tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
         generate_release_notes: true
 
     - name: Debug Output Tag
       shell: bash
       run: |
-          echo "DEBUG: ${% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
+          echo "DEBUG: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
 
     # -----------------------------------------------------------------------------
     # Step 3: (optional) build DockerImage
@@ -51,5 +55,13 @@ runs:
     - name: Login to GitHub container registry
       shell: bash
       run: |
-        podman login ghcr.io -u ${% raw %}${{ github.actor }}{% endraw %} -p ${% raw %}${{ inputs.github_token }}{% endraw %}
+        podman login ghcr.io -u {% raw %}${{ github.actor }}{% endraw %} -p {% raw %}${{ inputs.github_token }}{% endraw %}
+
+    - name: Build container image
+      shell: bash
+      run: |
+        podman build \
+          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
+          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %} \
+
 {% endif %}
