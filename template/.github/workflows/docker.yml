@@ -24,4 +24,4 @@ jobs:
       - name: Build container image
         shell: bash
         run: |
-          podman build -f docker/Dockerfile
+          sudo podman build -f docker/Dockerfile
