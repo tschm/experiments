@@ -5,4 +5,4 @@ use_devcontainer: false
 use_latex: true
 use_dependabot: false
 use_renovate: false
-use_docker: false
+use_docker: true
