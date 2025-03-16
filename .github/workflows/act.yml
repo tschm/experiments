@@ -13,6 +13,12 @@ jobs:
         with:
             python-version: '3.12'
 
+      - name: Show file
+        run: |
+          pwd
+          cat .github/actions/tag/action.yml
+          echo "Wurst"
+
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:
