@@ -1,0 +1,29 @@
+name: DOCKER
+
+on:
+  push:
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - name: Install docker
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
+
+      - name: Build container image
+        shell: bash
+        run: |
+          pwd
+          ls -all
+          docker build -f docker/Dockerfile .

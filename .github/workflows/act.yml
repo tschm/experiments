@@ -13,15 +13,24 @@ jobs:
         with:
             python-version: '3.12'
 
-      - name: Test Marimo flow
+      - name: Show file
+        run: |
+          cat .github/actions/tag/action.yml
+
+      - name: Build Docker image
         uses: tschm/cradle/actions/flow@main
         with:
-          workflow: marimo.yml
+          workflow: docker.yml
 
       - name: Test pre-commit flow
         uses: tschm/cradle/actions/flow@main
         with:
           workflow: pre-commit.yml
+
+      - name: Test Marimo flow
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: marimo.yml
 
       - name: Test ci flow
         uses: tschm/cradle/actions/flow@main
