@@ -1,0 +1,19 @@
+name: LATEX
+
+on:
+  push:
+
+jobs:
+  test-latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Launch the cradle
+        uses: tschm/cradle/actions/cradle@main
+        with:
+            python-version: '3.12'
+
+      - name: Build LaTeX document
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: latex.yml
