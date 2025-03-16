@@ -16,19 +16,18 @@ COPY --chown=app_user:app_user requirements.txt README.md notebooks /app/
 
 # No dev dependencies,
 RUN uv pip install --no-cache-dir -r requirements.txt && \
-    uv pip install --no-cache-dir marimo
+    rm -rf /uv /bin/uv
 
-RUN rm -rf /uv /bin/uv
-
-# Switch to non-root user
+# Switch to non-root
 USER app_user
 
 # Expose the Flight server port
-EXPOSE 8080
+ENV PORT=8080
+EXPOSE $PORT
 
 # Set environment variables
-ENV PYTHONPATH=/app
 ENV HOST=0.0.0.0
 
 # Run the server
-CMD [".venv/bin/python", "{{ project_name }}/server.py"]
+# CMD [".venv/bin/python", "{{ project_name }}/server.py"]
+CMD marimo edit --no-token -p $PORT --host $HOST /app/notebooks
