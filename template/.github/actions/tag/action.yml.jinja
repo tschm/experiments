@@ -55,13 +55,15 @@ runs:
     - name: Login to GitHub container registry
       shell: bash
       run: |
-        podman login ghcr.io -u {% raw %}${{ github.actor }}{% endraw %} -p {% raw %}${{ inputs.github_token }}{% endraw %}
+        podman login ghcr.io \
+        -u {% raw %}${{ github.actor }}{% endraw %} \
+        -p {% raw %}${{ inputs.github_token }}{% endraw %}
 
     - name: Build container image
       shell: bash
       run: |
         podman build \
           --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
-          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %} \
+          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %}
 
 {% endif %}
