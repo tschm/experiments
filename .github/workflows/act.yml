@@ -13,9 +13,10 @@ jobs:
         with:
             python-version: '3.12'
 
-      - name: Show file
-        run: |
-          cat .github/actions/tag/action.yml
+      - name: Build LaTeX document
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: latex.yml
 
       - name: Build Docker image
         uses: tschm/cradle/actions/flow@main
