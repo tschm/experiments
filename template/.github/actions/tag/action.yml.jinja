@@ -36,11 +36,6 @@ runs:
         tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
         generate_release_notes: true
 
-    - name: Debug Output Tag
-      shell: bash
-      run: |
-          echo "DEBUG: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
-
     # -----------------------------------------------------------------------------
     # Step 3: (optional) build DockerImage
     # -----------------------------------------------------------------------------
@@ -65,3 +60,8 @@ runs:
           --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
           -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %}
 {% endif %}
+
+    - name: Debug Output Tag
+      shell: bash
+      run: |
+        echo "DEBUG: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
