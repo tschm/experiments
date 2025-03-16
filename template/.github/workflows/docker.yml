@@ -25,4 +25,5 @@ jobs:
         shell: bash
         run: |
           pwd
+          ls -all
           docker build -f docker/Dockerfile .
