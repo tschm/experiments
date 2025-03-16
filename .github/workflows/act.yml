@@ -13,11 +13,6 @@ jobs:
         with:
             python-version: '3.12'
 
-      - name: Test pre-commit flow
-        uses: tschm/cradle/actions/flow@main
-        with:
-          workflow: pre-commit.yml
-
       - name: Test Marimo flow
         uses: tschm/cradle/actions/flow@main
         with:

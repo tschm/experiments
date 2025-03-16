@@ -16,3 +16,16 @@ jobs:
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: '--verbose --all-files'
+
+  pre-commit-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Launch the cradle
+        uses: tschm/cradle/actions/cradle@main
+        with:
+            python-version: '3.12'
+
+      - name: Test pre-commit flow
+        uses: tschm/cradle/actions/flow@main
+        with:
+          workflow: pre-commit.yml
