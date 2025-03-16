@@ -9,7 +9,7 @@ inputs:
 outputs:
   tag:
     description: 'A new tag'
-    value: ${{ steps.tag_version.outputs.new_tag }}
+    value: ${% raw %}{{ steps.tag_version.outputs.new_tag }}{% endraw %}
 
 runs:
   using: "composite"
@@ -21,7 +21,7 @@ runs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.2
       with:
-        github_token: ${{ inputs.github_token }}
+        github_token: ${% raw %}${{ inputs.github_token }}{% endraw %}
 
     # -----------------------------------------------------------------------------
     # Step 2: Create GitHub release
@@ -29,13 +29,13 @@ runs:
     - name: Create GitHub release without artifacts
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ steps.tag_version.outputs.new_tag }}
+        tag_name: ${% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
         generate_release_notes: true
 
     - name: Debug Output Tag
       shell: bash
       run: |
-          echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
+          echo "DEBUG: ${% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
 
     # -----------------------------------------------------------------------------
     # Step 3: (optional) build DockerImage
@@ -50,5 +50,5 @@ runs:
     - name: Login to GitHub container registry
       shell: bash
       run: |
-        podman login ghcr.io -u ${{ github.actor }} -p ${{ inputs.github_token }}
+        podman login ghcr.io -u ${% raw %${{ github.actor }}{% endraw %} -p ${% raw %${{ inputs.github_token }}{% endraw %}
 {% endif %}
