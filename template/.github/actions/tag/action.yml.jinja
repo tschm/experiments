@@ -44,7 +44,6 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 3: (optional) build DockerImage
     # -----------------------------------------------------------------------------
-
 {% if use_docker %}
     - name: Install podman
       shell: bash
@@ -65,5 +64,4 @@ runs:
         podman build \
           --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
           -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %}
-
 {% endif %}
