@@ -16,7 +16,7 @@ jobs:
 
       - name: Generate Tag
         id: tag
-        uses: ./.github/actions/tag
+        uses: tschm/cradle/actions/tag@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
