@@ -12,6 +12,8 @@ inputs:
 
 runs:
   using: "composite"
+  outputs:
+    new_tag: ${{ steps.tag_version.outputs.new_tag }}
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
@@ -25,11 +27,11 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 2: Create GitHub release
     # -----------------------------------------------------------------------------
-    - name: Create GitHub release without artifacts
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
-        generate_release_notes: true
+    #- name: Create GitHub release without artifacts
+    #  uses: softprops/action-gh-release@v2
+    #  with:
+    #    tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+    #    generate_release_notes: true
 
     # -----------------------------------------------------------------------------
     # Step 3: (optional) build DockerImage
