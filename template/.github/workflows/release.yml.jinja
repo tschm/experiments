@@ -30,7 +30,7 @@ jobs:
     steps:
 
       - name: "Build and publish the Container"
-        uses: ./.github/actions/docker
+        uses: tschm/cradle/actions/docker@main
         with:
           github_actor: {% raw %}${{ github.actor }}{% endraw %}
           github_repository: {% raw %}${{ github.repository }}{% endraw %}

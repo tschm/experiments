@@ -53,6 +53,5 @@ runs:
     - name: Install the dependencies
       shell: bash
       run : |
-        cat requirements.txt
         uv pip install -r requirements.txt
         uv pip install pip

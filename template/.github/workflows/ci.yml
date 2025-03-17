@@ -23,6 +23,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: ./.github/actions/test
+      - uses: tschm/cradle/actions/test@main
         with:
           tests-folder: tests
