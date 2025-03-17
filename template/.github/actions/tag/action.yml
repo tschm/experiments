@@ -6,11 +6,9 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
-
 runs:
   using: "composite"
-  outputs:
-    new_tag: ${{ env.new_tag }}
+
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
@@ -34,4 +32,4 @@ runs:
       shell: bash
       run: |
           echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
-          echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_ENV"
+          echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_OUTPUT"

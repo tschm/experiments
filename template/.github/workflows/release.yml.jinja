@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      new_tag: {% raw %}${{ env.new_tag }}{% endraw %}
+      new_tag: {% raw %}${{ steps.tag.outputs.new_tag }}{% endraw %}
 
     steps:
       - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
