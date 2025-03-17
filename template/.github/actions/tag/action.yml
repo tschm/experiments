@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   outputs:
-    new_tag: {% raw %}${{ env.new_tag }}{% endraw %}
+    new_tag: ${{ env.new_tag }}
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
@@ -19,7 +19,7 @@ runs:
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.2
       with:
-        github_token: {% raw %}${{ inputs.github_token }}{% endraw %}
+        github_token: ${{ inputs.github_token }}
 
     # -----------------------------------------------------------------------------
     # Step 2: Create GitHub release
@@ -27,7 +27,7 @@ runs:
     - name: Create GitHub release without artifacts
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+        tag_name: ${{ steps.tag_version.outputs.new_tag }}
         generate_release_notes: true
 
     - name: Debug Output Tag
