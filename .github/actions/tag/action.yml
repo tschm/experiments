@@ -13,6 +13,11 @@ inputs:
 
 runs:
   using: "composite"
+  outputs:
+    new_tag:
+      description: "A new tag"
+      value: ${{ steps.tag_version.outputs.new_tag }}
+
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
