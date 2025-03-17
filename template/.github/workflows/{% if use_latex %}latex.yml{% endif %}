@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
+      - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      - uses: ./.github/actions/latex
+      - uses: tschm/cradle/actions/latex@main
         with:
-          paper: paper/{{ project_name }}.tex
+          paper: paper/document.tex
           draft: draft
 
       # add or remove papers here
