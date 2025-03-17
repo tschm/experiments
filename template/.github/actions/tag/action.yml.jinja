@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   outputs:
-    new_tag: ${{ env.new_tag }}
+    new_tag: {% raw %}${{ env.new_tag }}{% endraw %}
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
