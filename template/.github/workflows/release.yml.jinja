@@ -32,40 +32,10 @@ jobs:
       - name: "Build and publish the Container"
         uses: ./.github/actions/docker
         with:
-          {% raw %}
-          github_actor: ${{ github.actor }}
-          github_repository: ${{ github.repository }}
-          tag: ${{ needs.build.output.new_tag }}
-          github_token: ${{ secrets.github_token }}
-          {% endraw %}
-
-{#    - name: Install docker#}
-{#      shell: bash#}
-{#      run: |#}
-{#          sudo apt-get update -qq#}
-{#          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman#}
-
-{#    - name: Login to GitHub container registry#}
-{#      shell: bash#}
-{#      run: |#}
-{#        podman login ghcr.io \#}
-{#        -u {% raw %}${{ github.actor }}{% endraw %} \#}
-{#        -p {% raw %}${{ inputs.github_token }}{% endraw %}#}
-
-{#    - name: Build container image#}
-{#      shell: bash#}
-{#      run: |#}
-{#        pwd#}
-{#        ls -all#}
-{#        podman build \#}
-{#          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ needs.build.outputs.new_tag }}{% endraw %} \#}
-{#          -f docker/Dockerfile \#}
-{#          .#}
-
-{#    - name: Push container image#}
-{#      shell: bash#}
-{#      run: |#}
-{#        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ needs.build.outputs.new_tag }}{% endraw %}#}
+          github_actor: {% raw %}${{ github.actor }}{% endraw %}
+          github_repository: {% raw %}${{ github.repository }}{% endraw %}
+          tag: {% raw %}${{ needs.build.output.new_tag }}{% endraw %}
+          github_token: {% raw %}${{ secrets.github_token }}{% endraw %}
 
 {% endif %}
   debug:
