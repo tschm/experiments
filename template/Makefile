@@ -33,3 +33,9 @@ help:  ## Display this help screen
 marimo: install ## Install Marimo
 	@uv pip install marimo
 	@uv run marimo edit notebooks
+
+
+.PHONY: test
+test: install  ## Run pytests
+	@uv pip install pytest
+	@uv run pytest tests
