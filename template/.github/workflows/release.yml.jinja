@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
     outputs:
       new_tag: {% raw %}${{ env.new_tag }}{% endraw %}
@@ -26,7 +26,7 @@ jobs:
 {% if use_docker %}
   docker:
     runs-on: ubuntu-latest
-    needs: build-and-release
+    needs: build
     steps:
     - name: Install docker
       shell: bash
@@ -47,13 +47,20 @@ jobs:
         pwd
         ls -all
         podman build \
-          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
+          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ needs.build.outputs.new_tag }}{% endraw %} \
           -f docker/Dockerfile \
           .
 
     - name: Push container image
       shell: bash
       run: |
-        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ needs.build.outputs.new_tag }}{% endraw %}
 
 {% endif %}
+  debug:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Output
+        run: |
+          echo "Repository {% raw %}${{ github.repository }}{% endraw %}
