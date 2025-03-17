@@ -6,15 +6,15 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
-#outputs:
-#  new_tag:
-#    description: 'A new tag'
+outputs:
+  new_tag:
+    description: 'A new tag'
 #    value: ${{ steps.tag_version.outputs.new_tag }}
 
 runs:
   using: "composite"
-  outputs:
-    new_tag:
+  #outputs:
+  #  new_tag:
   #    description: "A new tag"
   #    value: ${{ steps.tag_version.outputs.new_tag }}
 
