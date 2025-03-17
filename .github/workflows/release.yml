@@ -7,11 +7,25 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ env.new_tag }}
+
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
       - name: Generate Tag
+        id: tag
         uses: ./.github/actions/tag
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+
+  debug:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Print Tag
+        run: |
+          echo "A: ${{ needs.build.outputs.new_tag }}"
