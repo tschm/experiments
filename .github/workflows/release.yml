@@ -7,6 +7,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.tag.outputs.new_tag }}
+
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
