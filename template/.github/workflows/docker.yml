@@ -19,11 +19,9 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
 
       - name: Build container image
         shell: bash
         run: |
-          pwd
-          ls -all
-          docker build -f docker/Dockerfile .
+          podman build -f docker/Dockerfile .
