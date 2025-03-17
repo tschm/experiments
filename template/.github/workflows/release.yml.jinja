@@ -55,4 +55,5 @@ jobs:
       shell: bash
       run: |
         podman push ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+
 {% endif %}
