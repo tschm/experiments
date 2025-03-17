@@ -24,15 +24,16 @@ jobs:
         id: set_tag
         run: echo "new_tag=${{ steps.tag.outputs.new_tag }}" >> "$GITHUB_OUTPUT"
 
-      - name: Print Tag
+      - name: Print Tag 1
         run: |
-          echo "Generated tag: ${{ steps.tag.outputs.new_tag }}"
+          echo "Generated tag 1: ${{ steps.tag.outputs.new_tag }}"
+          echo "Generated tag 2: ${{ env.new_tag }}"
 
   debug:
     needs: build
     runs-on: ubuntu-latest
     steps:
 
-      - name: Print Tag
+      - name: Print Tag 2
         run: |
-          echo ${{ needs.build.outputs.new_tag }}
+          echo ${{ env.new_tag }}
