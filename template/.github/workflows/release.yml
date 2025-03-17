@@ -19,4 +19,3 @@ jobs:
         uses: ./.github/actions/tag
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          build_package: 'false'

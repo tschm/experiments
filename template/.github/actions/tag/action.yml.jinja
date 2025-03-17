@@ -10,11 +10,6 @@ inputs:
     required: false
     default: 'docker/Dockerfile'
 
-outputs:
-  tag:
-    description: 'A new tag'
-    value: {% raw %}{{ steps.tag_version.outputs.new_tag }}{% endraw %}
-
 runs:
   using: "composite"
   steps:
@@ -62,6 +57,11 @@ runs:
           --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
           -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %} \
           .
+
+    - name: Push container image
+      shell: bash
+      run: |
+        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %}
 {% endif %}
 
     - name: Debug Output Tag
