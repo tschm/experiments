@@ -5,15 +5,12 @@ inputs:
   github_token:
     description: "GitHub token for authentication"
     required: true
-  dockerfile-path:
-    description: 'Path to the Dockerfile.'
-    required: false
-    default: 'docker/Dockerfile'
+
 
 runs:
   using: "composite"
   outputs:
-    new_tag: ${{ steps.tag_version.outputs.new_tag }}
+    new_tag: ${{ env.new_tag }}
   steps:
     # -----------------------------------------------------------------------------
     # Step 1: Bump version and tag
@@ -27,46 +24,14 @@ runs:
     # -----------------------------------------------------------------------------
     # Step 2: Create GitHub release
     # -----------------------------------------------------------------------------
-    #- name: Create GitHub release without artifacts
-    #  uses: softprops/action-gh-release@v2
-    #  with:
-    #    tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
-    #    generate_release_notes: true
-
-    # -----------------------------------------------------------------------------
-    # Step 3: (optional) build DockerImage
-    # -----------------------------------------------------------------------------
-{% if use_docker %}
-    - name: Install docker
-      shell: bash
-      run: |
-          sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
-
-    - name: Login to GitHub container registry
-      shell: bash
-      run: |
-        podman login ghcr.io \
-        -u {% raw %}${{ github.actor }}{% endraw %} \
-        -p {% raw %}${{ inputs.github_token }}{% endraw %}
-
-    - name: Build container image
-      shell: bash
-      run: |
-        pwd
-        ls -all
-        podman build \
-          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
-          -f {% raw %}${{ inputs.dockerfile-path }}{% endraw %} \
-          .
-
-    - name: Push container image
-      shell: bash
-      run: |
-        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %}
-{% endif %}
+    - name: Create GitHub release without artifacts
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+        generate_release_notes: true
 
     - name: Debug Output Tag
       shell: bash
       run: |
-        echo "DEBUG: {% raw %}${{ steps.tag_version.outputs.new_tag }}{% endraw %}"
+          echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
+          echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_ENV"

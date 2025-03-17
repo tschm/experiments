@@ -1,0 +1,58 @@
+name: Build and Release
+
+on:
+  # Trigger on manual dispatch
+  workflow_dispatch
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: {% raw %}${{ env.new_tag }}{% endraw %}
+
+    steps:
+      - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
+        uses: actions/checkout@v4
+
+      - name: Generate Tag
+        uses: ./.github/actions/tag
+        with:
+          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+
+{% if use_docker %}
+  docker:
+    runs-on: ubuntu-latest
+    needs: build-and-release
+    steps:
+    - name: Install docker
+      shell: bash
+      run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
+
+    - name: Login to GitHub container registry
+      shell: bash
+      run: |
+        podman login ghcr.io \
+        -u {% raw %}${{ github.actor }}{% endraw %} \
+        -p {% raw %}${{ inputs.github_token }}{% endraw %}
+
+    - name: Build container image
+      shell: bash
+      run: |
+        pwd
+        ls -all
+        podman build \
+          --tag ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %} \
+          -f docker/Dockerfile \
+          .
+
+    - name: Push container image
+      shell: bash
+      run: |
+        podman push ghcr.io/{% raw %}${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}{% endraw %}
+{% endif %}
