@@ -7,6 +7,20 @@ permissions:
   contents: read
 
 jobs:
+  deptry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build the virtual environment"
+        uses: ./.github/actions/environment
+        with:
+          python-version: '3.12'
+
+      - name: Run deptry
+        shell: bash
+        run: |
+          python -m pip install --no-cache-dir deptry
+          python -m deptry -vv --per-rule-ignores "DEP002=kaleido,DEP002=marimo" pyscribble
+
   pre-commit:
     runs-on: ubuntu-latest
     steps:
