@@ -1,8 +1,8 @@
 exclude = [
-    "*__init__.py"
+    "__init__.py"
 ]
 line-length = 120
 target-version = "py312"
 
 [lint]
-    select = ["E", "F", "I"]
+select = ["E", "F", "I"]
