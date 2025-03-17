@@ -32,10 +32,12 @@ jobs:
       - name: "Build and publish the Container"
         uses: ./.github/actions/docker
         with:
+          {% raw %}
           github_actor: ${{ github.actor }}
           github_repository: ${{ github.repository }}
           tag: ${{ needs.build.output.new_tag }}
           github_token: ${{ secrets.github_token }}
+          {% endraw %}
 
 {#    - name: Install docker#}
 {#      shell: bash#}
