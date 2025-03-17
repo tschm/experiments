@@ -19,4 +19,4 @@ jobs:
 
       - name: Print Tag
         run: |
-          echo ${{ tag.outputs.new_tag }}
+          echo ${{ steps.tag.outputs.new_tag }}
