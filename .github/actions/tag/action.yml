@@ -6,17 +6,12 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
-outputs:
-  new_tag:
-    description: 'A new tag'
-#    value: ${{ steps.tag_version.outputs.new_tag }}
+#outputs:
+#  new_tag:
+#    description: 'A new tag'
 
 runs:
   using: "composite"
-  #outputs:
-  #  new_tag:
-  #    description: "A new tag"
-  #    value: ${{ steps.tag_version.outputs.new_tag }}
 
   steps:
     # -----------------------------------------------------------------------------
@@ -42,4 +37,4 @@ runs:
       run: |
           echo "DEBUG: ${{ steps.tag_version.outputs.new_tag }}"
           echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_ENV"
-          echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_OUTPUT"
+          # echo "new_tag=${{ steps.tag_version.outputs.new_tag }}" >> "$GITHUB_OUTPUT"
