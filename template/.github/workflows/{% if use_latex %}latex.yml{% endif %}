@@ -14,7 +14,7 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      - uses: tschm/cradle/actions/latex@main
+      - uses: tschm/cradle/actions/latex@v0.1.52
         with:
           paper: paper/document.tex
           draft: draft

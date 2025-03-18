@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate Tag
         id: tag
-        uses: tschm/cradle/actions/tag@main
+        uses: tschm/cradle/actions/tag@v0.1.52
         with:
           github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
@@ -31,7 +31,7 @@ jobs:
     steps:
 
       - name: "Build and publish the Container"
-        uses: tschm/cradle/actions/docker@main
+        uses: tschm/cradle/actions/docker@v0.1.52
         with:
           github_actor: {% raw %}${{ github.actor }}{% endraw %}
           github_repository: {% raw %}${{ github.repository }}{% endraw %}
