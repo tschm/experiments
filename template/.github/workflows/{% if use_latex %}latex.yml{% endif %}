@@ -17,6 +17,5 @@ jobs:
       - uses: tschm/cradle/actions/latex@v0.1.52
         with:
           paper: paper/document.tex
-          draft: draft
 
       # add or remove papers here
