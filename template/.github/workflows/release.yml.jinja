@@ -46,13 +46,13 @@ jobs:
     steps:
       - name: "Output tag"
         run: |
-          echo "Tag: ${{ needs.tagging.outputs.new_tag }}"
+          echo "Tag: {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}"
 
       - name: "Build and publish the LaTeX document"
         uses: tschm/cradle/actions/latex@main
         with:
           paper: paper/document.tex
-          tag: ${{ needs.tagging.outputs.new_tag }}
+          tag: % raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}
 {% endif %}
 
   debug:
