@@ -52,7 +52,7 @@ jobs:
         uses: tschm/cradle/actions/latex@main
         with:
           paper: paper/document.tex
-          tag: % raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}
+          tag: {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}
 {% endif %}
 
   debug:
