@@ -39,6 +39,24 @@ jobs:
           github_token: {% raw %}${{ secrets.github_token }}{% endraw %}
 
 {% endif %}
+
+{% if use_latex %}
+  latex:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+
+      - name: "Build and publish the LaTeX document"
+        uses: tschm/cradle/actions/latex@main
+        with:
+          paper: paper/document.tex
+          #github_actor: {% raw %}${{ github.actor }}{% endraw %}
+          #github_repository: {% raw %}${{ github.repository }}{% endraw %}
+          #tag: {% raw %}${{ needs.build.output.new_tag }}{% endraw %}
+          #github_token: {% raw %}${{ secrets.github_token }}{% endraw %}
+
+{% endif %}
+
   debug:
     runs-on: ubuntu-latest
     needs: build
