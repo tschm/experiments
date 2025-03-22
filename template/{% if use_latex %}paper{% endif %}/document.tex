@@ -1,5 +1,29 @@
 \documentclass{article}  % Add this line to specify the document class
 \usepackage{natbib}      % For citation management
+\usepackage{listings}
+\usepackage{xcolor}
+%\usepackage{graphicx}
+%\usepackage{amsmath}
+
+% Define custom colors for better contrast
+\definecolor{myblue}{rgb}{0.1, 0.2, 0.7}  % Darker blue
+\definecolor{mygreen}{rgb}{0.0, 0.5, 0.2}  % Darker green
+\definecolor{myred}{rgb}{0.7, 0.1, 0.1}  % Darker red
+\definecolor{paleyellow}{rgb}{1.0, 1.0, 0.9}  % Very pale yellow for background
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{myblue},       % Darker blue for keywords
+  commentstyle=\color{mygreen},      % Darker green for comments
+  stringstyle=\color{myred},         % Darker red for strings
+  numbers=left,
+  numberstyle=\tiny\color{gray},     % Use gray for line numbers
+  frame=single,
+  backgroundcolor=\color{paleyellow}, % Set very pale yellow background
+  breaklines=true,
+  showstringspaces=false
+}
 
 \title{A Brief Overview of the Simple Harmonic Oscillator}
 \author{Peter Maffay}
@@ -36,6 +60,15 @@ to this equation is:
 
 where $A$ is the amplitude and $\phi$ is the phase constant
 \citep{goldstein2002}.
+
+\begin{lstlisting}
+# Python code to calculate sum of squares of first 10 numbers
+def sum_of_squares(n):
+    return sum(i**2 for i in range(1, n+1))
+
+result = sum_of_squares(10)
+print(f"The sum of squares of first 10 numbers is: {result}")
+\end{lstlisting}
 
 \bibliography{references}
 \bibliographystyle{plainnat}
