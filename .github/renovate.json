@@ -7,4 +7,4 @@
   ],
   "enabledManagers": ["pre-commit", "github-actions"],
   "timezone": "Asia/Dubai"
-}  
+}
