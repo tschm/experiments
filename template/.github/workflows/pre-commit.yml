@@ -18,12 +18,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run deptry
-        uses: tschm/cradle/actions/deptry@v0.1.58
+      - uses: tschm/cradle/actions/deptry@v0.1.59
         with:
           source-folder: notebooks
-          options: "--per-rule-ignores DEP002=kaleido,clarabel"
-
+          options: '--per-rule-ignores "DEP002=clarabel|kaleido"'
+          
   pre-commit:
     runs-on: ubuntu-latest
     steps:
