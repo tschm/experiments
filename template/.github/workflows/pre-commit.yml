@@ -22,7 +22,7 @@ jobs:
         with:
           source-folder: notebooks
           options: '--per-rule-ignores "DEP002=clarabel|kaleido"'
-          
+
   pre-commit:
     runs-on: ubuntu-latest
     steps:
