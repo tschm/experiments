@@ -22,7 +22,7 @@ jobs:
         uses: tschm/cradle/actions/deptry@v0.1.58
         with:
           source-folder: notebooks
-          options: "DEP002=kaleido,DEP002=clarabel"
+          options: "--per-rule-ignores DEP002=kaleido,clarabel"
 
   pre-commit:
     runs-on: ubuntu-latest
