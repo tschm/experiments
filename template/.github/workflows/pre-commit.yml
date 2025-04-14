@@ -14,11 +14,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: "Build the virtual environment"
-        uses: tschm/cradle/actions/environment@v0.1.59
+        uses: tschm/cradle/actions/environment@v0.1.60
         with:
           python-version: '3.12'
 
-      - uses: tschm/cradle/actions/deptry@v0.1.59
+      - uses: tschm/cradle/actions/deptry@v0.1.60
         with:
           source-folder: notebooks
           options: '--per-rule-ignores "DEP002=clarabel|kaleido"'
