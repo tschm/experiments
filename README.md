@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/tschm/experiments/actions/workflows/act.yml/badge.svg)](https://github.com/tschm/experiments/actions/workflows/act.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/tschm/experiments/badge)](https://www.codefactor.io/repository/github/tschm/experiments)
 [![Created for qCradle](https://img.shields.io/badge/Created%20for-qCradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
 
 We support the creation of notebooks without the ambition to release software.
