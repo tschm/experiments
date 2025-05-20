@@ -9,16 +9,16 @@ jobs:
 
     steps:
       - name: Launch the cradle
-        uses: tschm/cradle/actions/cradle@v0.1.64
+        uses: tschm/cradle/actions/cradle@v0.1.66
         with:
             python-version: '3.12'
 
       - name: Test Marimo flow
-        uses: tschm/cradle/actions/flow@v0.1.64
+        uses: tschm/cradle/actions/flow@v0.1.66
         with:
           workflow: marimo.yml
 
       - name: Test ci flow
-        uses: tschm/cradle/actions/flow@v0.1.64
+        uses: tschm/cradle/actions/flow@v0.1.66
         with:
           workflow: ci.yml
