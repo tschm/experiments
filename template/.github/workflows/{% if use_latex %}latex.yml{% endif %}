@@ -12,9 +12,9 @@ jobs:
 
     steps:
       - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
+        uses: actions/checkout@v0.1.68
 
-      - uses: tschm/cradle/actions/latex@v0.1.55
+      - uses: tschm/cradle/actions/latex@v0.1.68
         with:
           paper: paper/document.tex
 
