@@ -1,6 +1,6 @@
-plotly==6.0.1
-cvxpy-base==1.6.4
-clarabel==0.10.0
-numpy==2.2.4
-marimo==0.11.31
+plotly==6.1.1
+cvxpy-base==1.6.5
+clarabel==0.11.0
+numpy==2.2.6
+marimo==0.13.11
 kaleido==0.2.1
