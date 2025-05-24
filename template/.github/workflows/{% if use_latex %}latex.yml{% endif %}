@@ -1,21 +1,26 @@
+# Workflow to build LaTeX documents
+# This workflow runs automatically on every push to the repository
+
 name: LaTeX
 
 on:
-  push
+  push  # Trigger on push events
 
+# Permissions needed for the workflow
 permissions:
-  contents: write
+  contents: write  # Allows the workflow to write to the repository (for artifacts)
 
 jobs:
+  # Job to build the LaTeX paper
   build_paper:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4  # Check out the repository code
 
-      - uses: tschm/cradle/actions/latex@v0.1.68
+      - uses: tschm/cradle/actions/latex@v0.1.68  # Custom action to build LaTeX documents
         with:
-          paper: paper/document.tex
+          paper: paper/document.tex  # Path to the LaTeX document to build
 
       # add or remove papers here
