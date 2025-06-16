@@ -13,16 +13,16 @@ jobs:
 
     steps:
       - name: Launch the cradle
-        uses: tschm/cradle/actions/cradle@v0.1.71  # Custom action to set up the environment
+        uses: tschm/cradle/actions/cradle@v0.1.72  # Custom action to set up the environment
         with:
             python-version: '3.12'  # Specify Python version to use
 
       - name: Test Marimo flow
-        uses: tschm/cradle/actions/flow@v0.1.71  # Custom action to run workflow tests
+        uses: tschm/cradle/actions/flow@v0.1.72  # Custom action to run workflow tests
         with:
           workflow: marimo.yml  # Test the Marimo workflow
 
       - name: Test ci flow
-        uses: tschm/cradle/actions/flow@v0.1.71  # Custom action to run workflow tests
+        uses: tschm/cradle/actions/flow@v0.1.72  # Custom action to run workflow tests
         with:
           workflow: ci.yml  # Test the CI workflow

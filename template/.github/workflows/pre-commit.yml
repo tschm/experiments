@@ -19,11 +19,11 @@ jobs:
         uses: actions/checkout@v4  # Check out the repository code
 
       - name: "Build the virtual environment"
-        uses: tschm/cradle/actions/environment@v0.1.71  # Custom action to set up Python environment
+        uses: tschm/cradle/actions/environment@v0.1.72  # Custom action to set up Python environment
         with:
           python-version: '3.12'  # Use Python 3.12 for dependency analysis
 
-      - uses: tschm/cradle/actions/deptry@v0.1.71  # Custom action to run deptry for dependency analysis
+      - uses: tschm/cradle/actions/deptry@v0.1.72  # Custom action to run deptry for dependency analysis
         with:
           source-folder: notebooks  # Folder to analyze dependencies
           options: '--per-rule-ignores "DEP002=clarabel|kaleido"'  # Ignore specific dependencies
@@ -32,4 +32,4 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: tschm/cradle/actions/pre-commit@v0.1.71  # Custom action to run pre-commit checks
+      - uses: tschm/cradle/actions/pre-commit@v0.1.72  # Custom action to run pre-commit checks
