@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Launch the cradle
-        uses: tschm/cradle/actions/cradle@v0.1.80  # Custom action to set up the environment
+        uses: tschm/cradle/actions/cradle@v0.1.81  # Custom action to set up the environment
         with:
             python-version: '3.12'  # Specify Python version to use
 
