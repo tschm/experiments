@@ -4,13 +4,8 @@
 # Scientific computing and numerical libraries
 numpy==2.2.6  # Fundamental package for scientific computing with Python
 
-# Optimization libraries
-cvxpy-base==1.6.5  # Python-embedded modeling language for convex optimization problems
-clarabel==0.11.0  # Solver for convex optimization problems
-
 # Data visualization
-plotly==6.1.1  # Interactive, publication-quality graphing library
-kaleido==0.2.1  # Static image export for web-based visualization libraries
+plotly==6.1.1   # Interactive, publication-quality graphing library
 
 # Interactive notebooks
-marimo==0.13.11  # Interactive notebook tool for Python
+marimo==0.14.10  # Interactive notebook tool for Python

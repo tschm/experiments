@@ -26,10 +26,9 @@ jobs:
       - uses: tschm/cradle/actions/deptry@v0.1.81  # Custom action to run deptry for dependency analysis
         with:
           source-folder: notebooks  # Folder to analyze dependencies
-          options: '--per-rule-ignores "DEP002=clarabel|kaleido"'  # Ignore specific dependencies
 
   # Job to run pre-commit checks on the repository
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: tschm/cradle/actions/pre-commit@v0.1.72  # Custom action to run pre-commit checks
+      - uses: tschm/cradle/actions/pre-commit@v0.1.81  # Custom action to run pre-commit checks

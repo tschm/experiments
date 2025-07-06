@@ -1,3 +1,4 @@
+
 import marimo
 
 __generated_with = "0.10.9"
@@ -63,58 +64,6 @@ def _(go, pos):
 
     # plot makes really only sense when using d=2
     return (fig,)
-
-
-@app.cell
-def _(mo):
-    mo.md("""## Compute with cvxpy""")
-    return
-
-
-@app.cell
-def _(np):
-    import cvxpy as cp
-
-    # We compare 3 equivalent ways to create the constraint that
-    # each point has to be within the ball of radius r centered at x
-    def con_1(points, x, r):
-        return [cp.norm(point - x) <= r for point in points]
-
-    def con_2(points, x, r):
-        return [cp.SOC(r, point - x) for point in points]
-
-    def con_3(points, x, r):
-        return [
-            cp.SOC(
-                r * np.ones(points.shape[0]),
-                points - cp.outer(np.ones(points.shape[0]), x),
-                axis=1,
-            )
-        ]
-
-    def min_circle_cvx(points, constraints=None, **kwargs):
-        # Use con_1 if no constraint construction is defined
-        constraints = constraints or con_1
-        # cvxpy variable for the radius
-        r = cp.Variable(1, name="Radius")
-        # cvxpy variable for the midpoint
-        x = cp.Variable(points.shape[1], name="Midpoint")
-
-        objective = cp.Minimize(r)
-        _constraints = constraints(points, x, r)
-
-        problem = cp.Problem(objective=objective, constraints=_constraints)
-        problem.solve(**kwargs)
-
-        return r.value, x.value
-
-    return con_1, con_2, con_3, cp, min_circle_cvx
-
-
-@app.cell
-def _(con_3, min_circle_cvx, pos):
-    min_circle_cvx(points=pos, constraints=con_3, solver="CLARABEL")
-    return
 
 
 if __name__ == "__main__":
