@@ -22,7 +22,7 @@ jobs:
             --per-rule-ignores
             "DEP001=cvxpy
              DEP002=clarabel|kaleido|cvxpy-base"  # Ignore specific false positives
-           
+
   # Job to run pre-commit checks on the repository
   pre-commit:
     runs-on: ubuntu-latest
