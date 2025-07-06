@@ -17,11 +17,6 @@ jobs:
         with:
             python-version: '3.12'  # Specify Python version to use
 
-      - name: Test Marimo flow
-        uses: tschm/cradle/actions/flow@v0.1.72  # Custom action to run workflow tests
-        with:
-          workflow: marimo.yml  # Test the Marimo workflow
-
       - name: Test ci flow
         uses: tschm/cradle/actions/flow@v0.1.72  # Custom action to run workflow tests
         with:
