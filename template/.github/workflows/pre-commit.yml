@@ -18,8 +18,11 @@ jobs:
       - uses: tschm/cradle/actions/deptry@v0.1.81  # Custom action to run deptry for dependency analysis
         with:
           source-folder: notebooks  # Folder to analyze dependencies
-          options: '--per-rule-ignores "DEP001=cvxpy DEP002=clarabel|kaleido|cvxpy-base"'  # Ignore specific dependencies
-
+          options: >-
+            --per-rule-ignores
+            "DEP001=cvxpy
+             DEP002=clarabel|kaleido|cvxpy-base"  # Ignore specific false positives
+           
   # Job to run pre-commit checks on the repository
   pre-commit:
     runs-on: ubuntu-latest
