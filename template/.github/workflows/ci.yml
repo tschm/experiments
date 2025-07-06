@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4  # Check out the repository code
 
       - name: "Build the virtual environment"
-        uses: tschm/cradle/actions/environment@v0.1.82  # Custom action to set up Python environment
+        uses: tschm/cradle/actions/environment@main  # Custom action to set up Python environment
         with:
           python-version: ${{ matrix.python-version }}  # Use Python version from matrix
           use-requirements-txt: 'true'
