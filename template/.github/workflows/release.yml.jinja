@@ -27,12 +27,6 @@ jobs:
       - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      - name: Set Tag from Input
-        id: set_tag
-        run: |
-          echo "tag={% raw %}${{ github.event.inputs.tag }}{% endraw %}" >> $GITHUB_OUTPUT
-          echo "Using tag: {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
-
       - name: Create and Push Tag
         run: |
           git config user.name "GitHub Actions"
@@ -40,21 +34,15 @@ jobs:
           git tag -a "{% raw %}${{ github.event.inputs.tag }}{% endraw %}" -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
           git push origin "{% raw %}${{ github.event.inputs.tag }}{% endraw %}"
 
-{% if use_docker %}
-  # Job to build and publish Docker container (only included if use_docker is true)
-  docker:
-    runs-on: ubuntu-latest
-    needs: tagging  # This job depends on the tagging job
-    steps:
-
-      - name: "Build and publish the Container"
-        uses: tschm/cradle/actions/docker@v0.2.0  # Custom action to build and publish Docker container
+      # Create a GitHub release for the tag
+      # This creates a release on GitHub with automatically generated release notes
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2.3.2  # Third-party release action
         with:
-          github_actor: {% raw %}${{ github.actor }}{% endraw %}  # GitHub username
-          github_repository: {% raw %}${{ github.repository }}{% endraw %}  # Repository name
-          tag: {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}  # Tag from the tagging job
-          github_token: {% raw %}${{ secrets.github_token }}{% endraw %}  # GitHub token for authentication
-{% endif %}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
+          tag_name: ${{ github.event.inputs.tag }}  # Use the provided tag
+          generate_release_notes: true  # Automatically generate notes from commits
+
 
 {% if use_latex %}
   # Job to build and publish LaTeX document (only included if use_latex is true)

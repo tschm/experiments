@@ -1,7 +1,7 @@
-# Workflow to automatically bump the version and create a new tag
+# Workflow to create a new tag and release based on user input
 # This workflow is manually triggered via the GitHub UI
 
-name: Bump version
+name: Create Tag and Release
 on:
   workflow_dispatch:  # Manual trigger only
     inputs:
@@ -15,25 +15,26 @@ permissions:
   contents: write  # Allows the workflow to write to the repository (create tags)
 
 jobs:
-  # Job to generate a new version tag
+  # Job to create and push a tag based on user input
   tagging:
     runs-on: ubuntu-latest
-    outputs:
-      new_tag: ${{ steps.set_tag.outputs.tag }}  # Output the tag to be used by other jobs
 
     steps:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      - name: Set Tag from Input
-        id: set_tag
-        run: |
-          echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
-          echo "Using tag: ${{ github.event.inputs.tag }}"
-
       - name: Create and Push Tag
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git tag -a {${{ github.event.inputs.tag }} -m "Release {% raw %}${{ github.event.inputs.tag }}"
-          git push origin ${{ github.event.inputs.tag }}
+          git tag -a "${{ github.event.inputs.tag }}" -m "Release ${{ github.event.inputs.tag }}"
+          git push origin "${{ github.event.inputs.tag }}"
+
+      # Create a GitHub release for the tag
+      # This creates a release on GitHub with automatically generated release notes
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2.3.2  # Third-party release action
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Token for authentication
+          tag_name: ${{ github.event.inputs.tag }}  # Use the provided tag
+          generate_release_notes: true  # Automatically generate notes from commits
