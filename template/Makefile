@@ -6,14 +6,12 @@
 .DEFAULT_GOAL := help
 
 # Create a Python virtual environment using uv (faster alternative to venv)
-venv:
+uv:
 	@curl -LsSf https://astral.sh/uv/install.sh | sh  # Install uv if not already installed
-	@uv venv  # Create a virtual environment in the current directory
-
 
 # Mark 'fmt' as a phony target
 .PHONY: fmt
-fmt: venv ## Run autoformatting and linting
+fmt: uv ## Run autoformatting and linting
 	@uvx pre-commit run --all-files  # Run all pre-commit hooks on all files
 
 
@@ -36,5 +34,5 @@ help:  ## Display this help screen
 
 # Mark 'marimo' as a phony target
 .PHONY: marimo
-marimo: install ## Install Marimo
-	@uvx marimo edit --sandbox notebooks/notebook.py  # Start Marimo in edit mode, opening the notebooks directory
+marimo: ## Install Marimo
+	@uvx marimo edit --sandbox marimo/demo.py  # Start Marimo in edit mode, opening the notebooks directory
