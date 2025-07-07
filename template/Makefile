@@ -37,5 +37,4 @@ help:  ## Display this help screen
 # Mark 'marimo' as a phony target
 .PHONY: marimo
 marimo: install ## Install Marimo
-	#@uv pip install marimo  # Install Marimo interactive notebook tool
 	@uvx marimo edit --sandbox notebooks/notebook.py  # Start Marimo in edit mode, opening the notebooks directory

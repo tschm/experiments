@@ -1,11 +1,4 @@
 # additional questions
----
-use_latex:
-    type: bool
-    default: false
-    help: Do you want to add a LaTeX document?
----
-
 # Require that the user has at least Copier v9.1.0 installed
 # Earliest version with "multiselect" support.
 _min_copier_version: "9.1.0"
