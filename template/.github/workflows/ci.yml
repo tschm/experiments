@@ -29,6 +29,6 @@ jobs:
           python-version: ${{ matrix.python-version }}  # Use Python version from matrix
           use-requirements-txt: 'true'
 
-      - uses: tschm/cradle/actions/test@v0.1.82  # Custom action to run tests
+      - uses: tschm/cradle/actions/test@v0.2.0  # Custom action to run tests
         with:
           tests-folder: tests  # Folder containing the tests to run
