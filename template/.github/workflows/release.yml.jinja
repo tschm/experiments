@@ -4,8 +4,12 @@
 name: Build and Release
 
 on:
-  # Trigger on manual dispatch
-  workflow_dispatch
+  workflow_dispatch:  # Manual trigger only
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.2.3)'
+        required: true
+        type: string
 
 # Permissions needed for the workflow
 permissions:
@@ -13,31 +17,38 @@ permissions:
   packages: write  # Allows the workflow to write to GitHub Packages (for Docker images)
 
 jobs:
-  # Job to generate a new version tag
+  # Job to set the tag based on input
   tagging:
     runs-on: ubuntu-latest
     outputs:
-      new_tag: {% raw %}${{ steps.tag.outputs.new_tag }}{% endraw %}  # Output the new tag to be used by other jobs
+      new_tag: {% raw %}${{ steps.set_tag.outputs.tag }}{% endraw %}  # Output the tag to be used by other jobs
 
     steps:
       - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      - name: Generate Tag
-        id: tag
-        uses: tschm/cradle/actions/tag@v0.1.68  # Custom action to generate a new tag
-        with:
-          github_token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}  # GitHub token for authentication
+      - name: Set Tag from Input
+        id: set_tag
+        run: |
+          echo "tag={% raw %}${{ github.event.inputs.tag }}{% endraw %}" >> $GITHUB_OUTPUT
+          echo "Using tag: {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+
+      - name: Create and Push Tag
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a {% raw %}${{ github.event.inputs.tag }}{% endraw %} -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+          git push origin {% raw %}${{ github.event.inputs.tag }}{% endraw %}
 
 {% if use_docker %}
   # Job to build and publish Docker container (only included if use_docker is true)
   docker:
     runs-on: ubuntu-latest
-    needs: build  # This job depends on the build job
+    needs: tagging  # This job depends on the tagging job
     steps:
 
       - name: "Build and publish the Container"
-        uses: tschm/cradle/actions/docker@v0.1.68  # Custom action to build and publish Docker container
+        uses: tschm/cradle/actions/docker@v0.2.0  # Custom action to build and publish Docker container
         with:
           github_actor: {% raw %}${{ github.actor }}{% endraw %}  # GitHub username
           github_repository: {% raw %}${{ github.repository }}{% endraw %}  # Repository name
@@ -56,18 +67,8 @@ jobs:
           echo "Tag: {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}"  # Print the new tag
 
       - name: "Build and publish the LaTeX document"
-        uses: tschm/cradle/actions/latex@v0.1.68  # Custom action to build LaTeX documents
+        uses: tschm/cradle/actions/latex@v0.2.0  # Custom action to build LaTeX documents
         with:
           paper: paper/document.tex  # Path to the LaTeX document to build
           tag: {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}  # Tag from the tagging job
 {% endif %}
-
-  # Job to display debugging information
-  debug:
-    runs-on: ubuntu-latest
-    needs: tagging  # This job depends on the tagging job
-    steps:
-      - name: Output
-        run: |
-          echo "Repository {% raw %}${{ github.repository }}{% endraw %}"  # Print the repository name
-          echo "Tag {% raw %}${{ needs.tagging.outputs.new_tag }}{% endraw %}"  # Print the new tag
