@@ -17,7 +17,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: tschm/cradle/actions/deptry@v0.2.0  # Custom action to run deptry for dependency analysis
+      - uses: tschm/cradle/actions/deptry@v0.2.1  # Custom action to run deptry for dependency analysis
         with:
           source-folder: notebooks  # Folder to analyze dependencies
 
@@ -25,4 +25,4 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: tschm/cradle/actions/pre-commit@v0.2.0  # Custom action to run pre-commit checks
+      - uses: tschm/cradle/actions/pre-commit@v0.2.1  # Custom action to run pre-commit checks
