@@ -7,7 +7,7 @@
     ":semanticCommits",
     ":pinVersions"
   ],
-  "enabledManagers": ["pip_requirements", "pre-commit", "github-actions", "devcontainer", "dockerfile"],
+  "enabledManagers": ["pip_requirements", "pre-commit", "github-actions"],
   "schedule": [
       "before 10am on tuesday"
   ]
