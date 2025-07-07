@@ -22,18 +22,18 @@ jobs:
       new_tag: ${{ steps.set_tag.outputs.tag }}  # Output the tag to be used by other jobs
 
     steps:
-      - name: Checkout [{% raw %}${{ github.repository }}{% endraw %}]
+      - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
       - name: Set Tag from Input
         id: set_tag
         run: |
-          echo "tag={% raw %}${{ github.event.inputs.tag }}{% endraw %}" >> $GITHUB_OUTPUT
-          echo "Using tag: {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+          echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+          echo "Using tag: ${{ github.event.inputs.tag }}"
 
       - name: Create and Push Tag
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git tag -a {% raw %}${{ github.event.inputs.tag }}{% endraw %} -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
-          git push origin {% raw %}${{ github.event.inputs.tag }}{% endraw %}
+          git tag -a {${{ github.event.inputs.tag }} -m "Release {% raw %}${{ github.event.inputs.tag }}"
+          git push origin ${{ github.event.inputs.tag }}
