@@ -12,7 +12,7 @@
 import marimo
 
 __generated_with = "0.13.11-dev14"
-app = marimo.App(layout_file="layouts/notebook.slides.json")
+app = marimo.App()
 
 with app.setup:
     import altair as alt
@@ -20,9 +20,11 @@ with app.setup:
     import numpy as np
     from vega_datasets import data
 
+    import marimo as mo
+
 
 @app.cell(hide_code=True)
-def _(leaves, mo):
+def _(leaves):
     mo.md(
         f"""
         # marimo slides! {"🍃" * leaves.value}
@@ -36,13 +38,13 @@ def _(leaves, mo):
 
 
 @app.cell
-def _(mo):
+def _():
     leaves = mo.ui.slider(1, 12)
     return (leaves,)
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(
         r"""
     **marimo** is an open-source Python notebook that's reproducible, shareable as an app, and executable as a script.
@@ -60,19 +62,19 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(r"## Dynamic plots").center()
     return
 
 
 @app.cell
-def _(mo):
+def _():
     exponent = mo.ui.slider(1, 3, label="exponent")
     return (exponent,)
 
 
 @app.cell
-def _(exponent, mo):
+def _(exponent):
     x = np.linspace(-3, 3, 100)
     y = x**exponent.value
 
@@ -99,13 +101,13 @@ def make_plot(x, y):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md("""# Select data in plots""")
     return
 
 
 @app.cell
-def _(mo):
+def _():
     chart = mo.ui.altair_chart(
         alt.Chart(data.cars())
         .mark_circle(size=60)
@@ -120,41 +122,15 @@ def _(mo):
 
 
 @app.cell
-def _(chart, mo):
+def _(chart):
     mo.vstack([mo.md("**Click and drag to select data.**"), chart, chart.value])
     return
 
 
-# @app.function
-# async def make_data():
-#     try:
-#         import micropip
-#
-#         await micropip.install("vega_datasets")
-#     finally:
-#         ...
-#
-#     from vega_datasets import data
-#
-#     return data.cars()
-
-
 @app.cell
-def _(mo):
+def _():
     mo.md(r"""## Thanks!""")
     return
-
-
-@app.cell
-def _():
-    return (np,)
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":
