@@ -19,7 +19,7 @@ jobs:
       - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4  # Check out the repository code
 
-      - uses: tschm/cradle/actions/latex@v0.1.68  # Custom action to build LaTeX documents
+      - uses: tschm/cradle/actions/latex@v0.2.0  # Custom action to build LaTeX documents
         with:
           paper: paper/document.tex  # Path to the LaTeX document to build
 

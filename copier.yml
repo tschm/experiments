@@ -1,29 +1,9 @@
 # additional questions
 ---
-use_devcontainer:
-    type: bool
-    default: false
-    help: Do you want to support a DevContainer?
-
 use_latex:
     type: bool
     default: false
     help: Do you want to add a LaTeX document?
-
-use_dependabot:
-    type: bool
-    default: false
-    help: Do you want to use Dependabot?
-
-use_renovate:
-    type: bool
-    default: false
-    help: Do you want to use Renovate?
-
-use_docker:
-    type: bool
-    default: false
-    help: Do you want to build a Docker container
 ---
 
 # Require that the user has at least Copier v9.1.0 installed

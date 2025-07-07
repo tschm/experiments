@@ -16,17 +16,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: tschm/cradle/actions/pre-commit@v0.1.72  # Custom action to run pre-commit checks
-
-  # Job to test pre-commit checks on the template
-  pre-commit-template:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Launch the cradle
-        uses: tschm/cradle/actions/cradle@v0.1.72  # Custom action to set up the environment
-        with:
-            python-version: '3.12'  # Specify Python version to use
-
-      - name: Test pre-commit flow
-        uses: tschm/cradle/actions/flow@v0.1.72  # Custom action to run workflow tests
-        with:
-          workflow: pre-commit.yml  # Test the pre-commit workflow

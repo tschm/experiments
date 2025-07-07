@@ -37,8 +37,8 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git tag -a {% raw %}${{ github.event.inputs.tag }}{% endraw %} -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
-          git push origin {% raw %}${{ github.event.inputs.tag }}{% endraw %}
+          git tag -a "{% raw %}${{ github.event.inputs.tag }}{% endraw %}" -m "Release {% raw %}${{ github.event.inputs.tag }}{% endraw %}"
+          git push origin "{% raw %}${{ github.event.inputs.tag }}{% endraw %}"
 
 {% if use_docker %}
   # Job to build and publish Docker container (only included if use_docker is true)
