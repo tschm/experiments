@@ -5,7 +5,8 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/tschm/experiments/badge)](https://www.codefactor.io/repository/github/tschm/experiments)
 [![Created for qCradle](https://img.shields.io/badge/Created%20for-qCradle-blue?style=flat-square)](https://github.com/cvxgrp/cradle)
 
-We support the creation of notebooks without the ambition to release software via PyPI.
+We support the creation of notebooks without the ambition
+to release software via PyPI.
 The approach taken here is very suitable for computational experiments.
 The repo is not minimalistic but comes with a curated set of pre-commit hooks
 and follows modern and established guidelines.
