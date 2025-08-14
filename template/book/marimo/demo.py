@@ -9,6 +9,11 @@
 #     "pyarrow",
 # ]
 # ///
+"""Demo marimo notebook showing slide functionality.
+
+This notebook demonstrates how to create interactive slides with marimo.
+"""
+
 import marimo
 
 __generated_with = "0.13.11-dev14"
@@ -16,11 +21,10 @@ app = marimo.App()
 
 with app.setup:
     import altair as alt
+    import marimo as mo
     import matplotlib.pyplot as plt
     import numpy as np
     from vega_datasets import data
-
-    import marimo as mo
 
 
 @app.cell(hide_code=True)
@@ -53,7 +57,10 @@ def _():
 
     Starting with **v0.7.2**, every marimo notebook can be shared as an interactive slide deck.
 
-    **In fact, this slide deck was made with a marimo notebook!** To present your notebook as slides, just toggle the app view and choose the slide layout in the top right. Every cell with an output becomes its own slide.
+    **In fact, this slide deck was made with a marimo notebook!**
+
+    To present your notebook as slides, just toggle the app view and choose the slide layout in the top right.
+    Every cell with an output becomes its own slide.
 
     Next are a couple of examples of dynamic slides.
     """
@@ -94,6 +101,15 @@ def _(exponent):
 
 @app.function
 def make_plot(x, y):
+    """Create a plot of y vs x with fixed axis limits.
+
+    Args:
+        x: Array of x values
+        y: Array of y values
+
+    Returns:
+        Matplotlib axes object
+    """
     plt.plot(x, y)
     plt.ylim(-27, 27)
     plt.xlim(-3, 3)

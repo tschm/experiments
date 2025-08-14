@@ -1,1 +1,20 @@
-template/ruff.toml
+# Ruff configuration for tschm/.config-templates
+
+# Maximum line length
+line-length = 120
+
+# Target Python version
+target-version = "py312"
+
+[lint]
+# Linting rules to select
+select = ["D", "E", "F", "I", "N", "W", "UP"]
+
+[lint.pydocstyle]
+# Use Google docstring convention
+convention = "google"
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
