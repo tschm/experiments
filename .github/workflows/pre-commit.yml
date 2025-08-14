@@ -32,4 +32,3 @@ jobs:
       - uses: pre-commit/action@v3.0.1  # Official pre-commit GitHub Action
         with:
           extra_args: '--verbose --all-files'  # Run on all files with verbose output
-          token: ${{ inputs.github_token }}    # Pass GitHub token if provided to avoid rate limiting
