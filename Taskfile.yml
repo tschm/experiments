@@ -58,3 +58,4 @@ tasks:
     silent: true
     cmds:
       - task --list-all
+        

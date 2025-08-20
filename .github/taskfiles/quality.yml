@@ -33,7 +33,7 @@ tasks:
         else
           printf "${YELLOW}[WARN] No pyproject.toml found, skipping deptry${RESET}\n"
         fi
-
+  
   check:
     desc: Run all code quality checks
     deps: [lint, fmt, deptry]
