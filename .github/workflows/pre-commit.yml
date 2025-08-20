@@ -1,34 +1,40 @@
-# Workflow to run pre-commit checks on the codebase
-# This workflow runs automatically on every push to the repository
+# This file is part of the tschm/.config-templates repository
+# (https://github.com/tschm/.config-templates).
+#
+# Workflow: Pre-commit
+# Purpose: This workflow runs pre-commit checks to ensure code quality
+#          and consistency across the codebase. It helps catch issues
+#          like formatting errors, linting issues, and other code quality
+#          problems before they are merged.
+#
+# Trigger: This workflow runs on every push
+#
+# Components:
+#   - 🔍 Run pre-commit checks using reusable action
 
-name: pre-commit
+name: "PRE-COMMIT"
 
 on:
-  push:  # Trigger on push events
+  push:
 
-# Only read access is needed for pre-commit checks
 permissions:
-  contents: read  # Read-only access to repository contents
+  contents: read
 
 jobs:
-  # Job to run pre-commit checks on the repository
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Check out the repository code
-      # This ensures we have the latest code from the specified ref
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v5  # Official GitHub checkout action
+      # Check out the repository code
+      - uses: actions/checkout@v5
 
-      # Step 2: Set up Node.js environment
-      # This is required for some pre-commit hooks that use Node.js
-      - name: Install Node 22
-        uses: actions/setup-node@v4  # Official Node.js setup action
-        with:
-          node-version: '22'  # Use Node.js version 22
+      # Use the composite action to render the project
+      - name: Setup the project
+        uses: ./.github/actions/setup-project
 
-      # Step 3: Run all pre-commit hooks on all files
-      # This executes all hooks defined in .pre-commit-config.yaml
-      - uses: pre-commit/action@v3.0.1  # Official pre-commit GitHub Action
-        with:
-          extra_args: '--verbose --all-files'  # Run on all files with verbose output
+      - name: Lint
+        run: |
+          task quality:lint
+
+      - name: Format
+        run: |
+          task quality:fmt
